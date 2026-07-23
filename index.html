@@ -565,15 +565,48 @@
         window.addEventListener('touchend', endDraw);
 
         // --- Page 3: Tape Generation ---
+// --- Page 3: Tape Generation ---
         function generateTape() {
             const note = document.getElementById('self-note').value;
             if (note.trim() === "") {
                 alert("請寫下你想安放的話 🤍");
                 return;
             }
-            document.getElementById('postcard-content').innerText = `「${note}」`;
-            document.getElementById('postcard-box').style.display = 'block';
-            document.getElementById('self-note').value = "";
+
+            // 1. 抓取按鈕，讓按鈕顯示「載入中」，防止使用者狂按
+            const btn = document.querySelector('.action-btn[onclick="generateTape()"]');
+            const originalText = btn.innerText;
+            btn.innerText = "正在封存中... 📦";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            // 2. 貼上你剛剛在 GAS 複製的 Web app URL (請保留引號)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzR2MXpmBoisKX5R3Y5zRDj32yaKqPd7EmL4-N70rDekjvlx0a-gwmdmOoKTED-k74/exec';
+
+            // 3. 打包資料
+            let formData = new FormData();
+            formData.append('message', note);
+
+            // 4. 發送資料到 Google Sheet
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    // 成功送出後的畫面變化
+                    document.getElementById('postcard-content').innerText = `「${note}」`;
+                    document.getElementById('postcard-box').style.display = 'block';
+                    document.getElementById('self-note').value = ""; // 清空輸入框
+                    
+                    // 恢復按鈕狀態
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                })
+                .catch(error => {
+                    // 萬一網路斷線的錯誤處理
+                    alert("封存失敗，請檢查網路連線後重試 🤍");
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                });
         }
     </script>
 </body>
