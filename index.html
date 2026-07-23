@@ -197,8 +197,8 @@
                         <text x="390" y="40" font-size="12" font-weight="bold" fill="#2a9d8f">5. 接受</text>
 
                         <g id="cloudGroupCurvy" transform="translate(40, 140)">
-                            <!-- Image reference updated to cloud.PNG -->
-                            <image href="cloud.PNG" x="-75" y="-60" width="150" height="120" />
+                            <!-- Capital C to match GitHub file name: Cloud.PNG -->
+                            <image href="Cloud.PNG" x="-75" y="-60" width="150" height="120" />
                         </g>
                     </svg>
                 </div>
@@ -227,8 +227,8 @@
                         <g id="pendulumGroup" style="transform-origin: 200px 10px; transform: rotate(0deg);">
                             <line x1="200" y1="10" x2="200" y2="80" stroke="#111" stroke-width="2.5" stroke-dasharray="4 3" />
                             <g transform="translate(200, 100)">
-                                <!-- Image reference updated to cloud.PNG -->
-                                <image href="cloud.PNG" x="-90" y="-75" width="180" height="150" />
+                                <!-- Capital C to match GitHub file name: Cloud.PNG -->
+                                <image href="Cloud.PNG" x="-90" y="-75" width="180" height="150" />
                             </g>
                         </g>
                     </svg>
@@ -396,7 +396,8 @@
         // --- Page 3: Heart Box Logic ---
         function generateTape() {
             const note = document.getElementById('self-note').value;
-            const visitorName = document.getElementById('visitor-name').value || "無名氏";
+            const visitorInput = document.getElementById('visitor-name');
+            const visitorName = visitorInput ? visitorInput.value : "無名氏";
             const box = document.getElementById('postcard-box');
             
             if (note.trim() === "") {
