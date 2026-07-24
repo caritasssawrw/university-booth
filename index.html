@@ -155,8 +155,7 @@
                     <button class="tag-btn" onclick="toggleSymptom(this)">麻木無感</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">失眠</button>
                 </div>
-<br>
-    
+                <br>
                 
                 <div class="tag-category">💭 【心情】上呢？（可多選）</div>
                 <div class="tags-grid" id="mind-tags">
@@ -168,11 +167,11 @@
                     <button class="tag-btn" onclick="toggleSymptom(this)">羞恥</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">害怕</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">孤單</button> <br>
-                      <div class="tag-category">💭 那【行為】上呢？（可多選）</div>
-                  <div class="tags-grid" id="behavior-tags">
-                      <button class="tag-btn" onclick="toggleSymptom(this)">暴飲暴食</button>
-                     <button class="tag-btn" onclick="toggleSymptom(this)">社交退縮</button>
-                 </div>
+                    <div class="tag-category">💭 那【行為】上呢？（可多選）</div>
+                    <div class="tags-grid" id="behavior-tags">
+                        <button class="tag-btn" onclick="toggleSymptom(this)">暴飲暴食</button>
+                        <button class="tag-btn" onclick="toggleSymptom(this)">社交退縮</button>
+                    </div>
                 </div>
 
                 <div class="feedback-box" id="symptom-feedback">
@@ -215,7 +214,6 @@
                     <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()">陪伴雲朵走一轉哀傷歷程。 🚶‍♂️</button>
                 </div>
 
-                <!-- 新增：動態文字回饋區塊 (預設隱藏) -->
                 <div class="feedback-box" id="curvy-feedback" style="display:none; background:#f0f9f4; border-color: #2a9d8f; margin-top: 15px;">
                     🌱 允許自己在修復路上有起有伏，溫柔包容自己的反覆。帶住這段經歷，你正在慢慢重新建立屬於自己的生活節奏。
                 </div>
@@ -364,6 +362,15 @@
                     • <b>自我關懷提示卡 (7張) 及木架</b><br>
                     <br>帶住傷痕，繼續溫柔生活。🩹
                 </div>
+
+                <!-- 新增：社區資源按鈕區塊 -->
+                <div style="margin-top: 18px; text-align: center;">
+                    <a href="https://example.com/community-resources.pdf" target="_blank" style="text-decoration: none;">
+                        <button class="action-btn" style="background: #fffbe6; width: 100%; max-width: 320px; padding: 12px 16px; font-size: 13.5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>📍 社區支援及輔導資源指南</span> 🔗
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -415,7 +422,6 @@
             cancelAnimationFrame(curvyAnimFrame);
             let startTime = null;
             
-            // 每次點擊先隱藏回饋框
             const feedbackBox = document.getElementById('curvy-feedback');
             if(feedbackBox) feedbackBox.style.display = 'none';
 
@@ -428,15 +434,14 @@
                 if (t < 7.0) {
                     curvyAnimFrame = requestAnimationFrame(animateCurvy);
                 } else {
-                    updateCloudOnPath(1); // 確保最終停在終點 (接受階段)
-                    // 動畫結束後顯示文字
+                    updateCloudOnPath(1);
                     if(feedbackBox) feedbackBox.style.display = 'flex';
                 }
             }
             curvyAnimFrame = requestAnimationFrame(animateCurvy);
         }
 
-        // --- Page 2-B: DPM Animated Sequence ---
+        // --- Page 2-B: DPM Animated Sequence (Fast & Snappy for Gen Z) ---
         const pendulumGroup = document.getElementById('pendulumGroup');
         const penFeedback = document.getElementById('pendulum-feedback');
         let pendulumAnimId = null;
@@ -450,30 +455,31 @@
                 let t = (timestamp - startTime) / 1000; // time in seconds
                 let angle = 0;
                 
-                if (t < 4.5) {
-                    angle = 42 * Math.cos(t * 4) * Math.exp(-t * 0.1);
-                    penFeedback.innerHTML = "🧭 <b>初期：</b>剛經歷分離，擺盪較頻繁且劇烈";
-                    penFeedback.style.background = "#fffbe6";
+                // Total duration reduced to ~7.5 seconds
+                if (t < 2.0) {
+                    // Starts swung to LEFT (Loss side: negative angle) at t=0
+                    angle = -35 * Math.cos(t * 7) * Math.exp(-t * 0.4) - 5;
+                    penFeedback.innerHTML = "🧭 <b>初期：</b>剛經歷分離，情緒在「失落端」劇烈擺盪";
+                    penFeedback.style.background = "#fcf3f3";
                 } 
-                else if (t < 9.0) {
-                    let localT = t - 4.5;
-                    let center = 22 * (1 - Math.exp(-localT * 1.5));
-                    angle = center + 25 * Math.cos(t * 2.5) * Math.exp(-localT * 0.4);
-                    penFeedback.innerHTML = "🌱 <b>適應期：</b>隨時間過去，擺盪頻率慢慢減少，生活重心逐漸移向「復原取向」。";
+                else if (t < 4.0) {
+                    let localT = t - 2.0;
+                    let center = -5 + 25 * (1 - Math.exp(-localT * 2)); // Shift center to +20 (Restoration)
+                    angle = center - 20 * Math.cos(localT * 5) * Math.exp(-localT * 0.8);
+                    penFeedback.innerHTML = "🌱 <b>適應期：</b>隨時間過去，擺盪減緩，重心移向「復原取向」。";
                     penFeedback.style.background = "#f0f9f4";
                 }
-                else if (t < 12.0) {
-                    let localT = t - 9.0;
-                    angle = 22 - 57 * Math.sin(localT * Math.PI);
-                    if (localT > 1.0) angle = 22;
-                    
-                    penFeedback.innerHTML = "🌧️ <b>觸發點：</b>遇上節日、紀念日或舊地重遊，仍會再次擺回「失落取向」，會難過、思念或唏噓... 這是正常的反應。";
+                else if (t < 5.5) {
+                    let localT = t - 4.0;
+                    // Trigger point swings back to negative angle (Loss side)
+                    angle = 20 - 50 * Math.sin((localT / 1.5) * Math.PI);
+                    penFeedback.innerHTML = "🌧️ <b>觸發點：</b>遇上節日或舊地重遊，仍會再次擺回「失落取向」...";
                     penFeedback.style.background = "#fcf3f3";
                 }
-                else if (t < 16.0) {
-                    let localT = t - 12.0;
-                    angle = 22 - 15 * Math.sin(localT * 3) * Math.exp(-localT * 0.5);
-                    penFeedback.innerHTML = "🤍 <b>長遠復原：</b>接納偶爾的刺痛，帶著傷痕繼續溫柔生活。";
+                else if (t < 7.5) {
+                    let localT = t - 5.5;
+                    angle = 20 - 15 * Math.sin(localT * 4) * Math.exp(-localT * 1.2);
+                    penFeedback.innerHTML = "🤍 <b>長遠復原：</b>接納偶爾的擺盪，帶著傷痕繼續溫柔生活。";
                     penFeedback.style.background = "#fdfbf7";
                 }
                 else {
@@ -570,7 +576,6 @@
         window.addEventListener('touchend', endDraw);
 
         // --- Page 3: Tape Generation ---
-// --- Page 3: Tape Generation ---
         function generateTape() {
             const note = document.getElementById('self-note').value;
             if (note.trim() === "") {
@@ -578,35 +583,28 @@
                 return;
             }
 
-            // 1. 抓取按鈕，讓按鈕顯示「載入中」，防止使用者狂按
             const btn = document.querySelector('.action-btn[onclick="generateTape()"]');
             const originalText = btn.innerText;
             btn.innerText = "正在封存中... 📦";
             btn.style.opacity = "0.7";
             btn.disabled = true;
 
-            // 2. 貼上你剛剛在 GAS 複製的 Web app URL (請保留引號)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzR2MXpmBoisKX5R3Y5zRDj32yaKqPd7EmL4-N70rDekjvlx0a-gwmdmOoKTED-k74/exec';
 
-            // 3. 打包資料
             let formData = new FormData();
             formData.append('message', note);
 
-            // 4. 發送資料到 Google Sheet
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
-                    // 成功送出後的畫面變化
                     document.getElementById('postcard-content').innerText = `「${note}」`;
                     document.getElementById('postcard-box').style.display = 'block';
-                    document.getElementById('self-note').value = ""; // 清空輸入框
+                    document.getElementById('self-note').value = "";
                     
-                    // 恢復按鈕狀態
                     btn.innerText = originalText;
                     btn.style.opacity = "1";
                     btn.disabled = false;
                 })
                 .catch(error => {
-                    // 萬一網路斷線的錯誤處理
                     alert("封存失敗，請檢查網路連線後重試 🤍");
                     btn.innerText = originalText;
                     btn.style.opacity = "1";
