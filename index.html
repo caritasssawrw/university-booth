@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>關係失去整理所 🩹｜明愛心營站</title>
+    <title>關係失去整理所 🩹｜明愛心營站─ 關係傷痛支援計劃</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -72,8 +73,10 @@
         
         .text-content { font-size: 13.5px; line-height: 1.65; color: #444; margin-bottom: 16px; }
         
+        /* Academic Source Corner */
         .source-cite {
-            text-align: right; font-size: 10.5px; color: #999; margin-top: -10px; margin-bottom: 15px; font-style: italic;
+            text-align: right; font-size: 10.5px; color: #999; margin-top: -10px; margin-bottom: 15px;
+            font-style: italic;
         }
 
         /* Tags & Buttons */
@@ -95,8 +98,8 @@
         /* Status & Feedback Boxes */
         .feedback-box {
             background: #fdfbf7; border: 2px dashed #111; border-radius: 10px; padding: 12px 15px;
-            font-size: 13px; line-height: 1.6; display: flex; flex-direction: column; align-items: center;
-            text-align: center; margin-top: 15px; font-weight: 500; transition: 0.3s;
+            font-size: 13px; line-height: 1.6; min-height: 60px; display: flex; align-items: center;
+            justify-content: center; text-align: center; margin-top: 15px; font-weight: 500; transition: 0.3s;
         }
 
         /* SVG Stage */
@@ -107,6 +110,7 @@
         }
         svg.stage-svg { width: 100%; height: 100%; overflow: visible; }
         
+        /* Custom Slider */
         .custom-slider {
             -webkit-appearance: none; width: 100%; height: 12px; background: #ddd;
             border-radius: 10px; border: 2px solid #111; outline: none; margin: 15px 0;
@@ -116,37 +120,10 @@
             border-radius: 50%; background: #9ad5f8; border: 3px solid #111; cursor: pointer; box-shadow: 2px 2px 0px #111;
         }
 
-        /* Interactive Text */
-        .stage-text {
-            cursor: pointer; font-size: 13px; font-weight: bold; fill: #444; transition: fill 0.2s;
+        .doodle-textarea {
+            width: 100%; height: 100px; border: 2.5px solid #111; border-radius: 10px; padding: 12px;
+            font-size: 14px; resize: none; margin-bottom: 12px;
         }
-        .stage-text:hover { fill: #111; text-decoration: underline; }
-
-        /* Unboxing Section */
-        .boxes-container {
-            display: flex; justify-content: space-between; gap: 8px; margin-bottom: 15px;
-        }
-        .box-item {
-            flex: 1; background: #fffbe6; border: 2px dashed #f4a261; border-radius: 10px;
-            padding: 15px 5px; text-align: center; cursor: pointer; transition: transform 0.2s, background 0.2s;
-            font-size: 13px; font-weight: bold; color: #555;
-        }
-        .box-item:hover, .box-item:active { transform: translateY(-3px); background: #fdf5d3; }
-       .box-opened { 
-            background: #f0f9f4; 
-            border-color: #2a9d8f; 
-            color: #2a9d8f; 
-            /* Removed pointer-events: none; so it can be clicked again */
-        }
-
-        .list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12.5px; }
-        .list-grid div { background: #f0f4f8; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #9ad5f8;}
-        
-        .metaphor-box {
-            background: #fff; border: 2px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px;
-        }
-        .metaphor-box h4 { margin: 0 0 8px 0; font-size: 14px; color: #111; }
-
     </style>
 </head>
 <body>
@@ -156,7 +133,7 @@
         <div class="header">
             <span class="org-badge">The Space for Relationship Loss and Self-integration</span>
             <h1>關係失去整理所 🩹</h1>
-            <p style="margin-bottom:0;"> 明愛心營站 ─ 關係傷痛支援計劃</p>
+            <p style="margin-bottom:0;">帶住傷痕，溫柔整理。</p>
         </div>
 
         <!-- ================= PAGE 1: 攤開區 ================= -->
@@ -173,7 +150,6 @@
                 <div class="tag-category">👀 你最近有經歷過以下【身體】訊號嗎？（可多選）</div>
                 <div class="tags-grid" id="body-tags">
                     <button class="tag-btn" onclick="toggleSymptom(this)">頭昏腦脹</button>
-                    <button class="tag-btn" onclick="toggleSymptom(this)">難以專注</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">嘔吐</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">心口翳悶</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">麻木無感</button>
@@ -190,14 +166,12 @@
                     <button class="tag-btn" onclick="toggleSymptom(this)">愧疚</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">羞恥</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">害怕</button>
-                    <button class="tag-btn" onclick="toggleSymptom(this)">孤單</button>
-                 </div>
-    
-
-                <div class="tag-category">🚶‍♂️ 那【行為】上呢？（可多選）</div>
-                <div class="tags-grid" id="behavior-tags">
-                    <button class="tag-btn" onclick="toggleSymptom(this)">暴飲暴食</button>
-                    <button class="tag-btn" onclick="toggleSymptom(this)">社交退縮</button>
+                    <button class="tag-btn" onclick="toggleSymptom(this)">孤單</button> <br>
+                    <div class="tag-category">💭 那【行為】上呢？（可多選）</div>
+                    <div class="tags-grid" id="behavior-tags">
+                        <button class="tag-btn" onclick="toggleSymptom(this)">暴飲暴食</button>
+                        <button class="tag-btn" onclick="toggleSymptom(this)">社交退縮</button>
+                    </div>
                 </div>
 
                 <div class="feedback-box" id="symptom-feedback">
@@ -205,53 +179,43 @@
                 </div>
                 
                 <div style="text-align: center; margin-top:20px;">
-                    <button class="action-btn" onclick="switchPage('page2')">攤開了，前往整理執拾區慢慢梳理 ➡️</button>
+                    <button class="action-btn" onclick="switchPage('page2')">攤開了，前往整理區慢慢梳理 ➡️</button>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 2: 整理執拾區 ================= -->
+        <!-- ================= PAGE 2: 整理區 ================= -->
         <div id="page2" class="page">
             
-            <!-- Step 2-A: 哀傷的五個階段模型 -->
+            <!-- Step 2-A: 非線性的哀傷歷程 -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 2-A：非線性軌跡 🌊</span>
-                <h2>哀傷的五個階段模型</h2>
+                <h2>非線性的哀傷歷程</h2>
                 <div class="quote-box">「明明昨天好像好轉了，為什麼今天又突然崩潰？我是否退步了？」</div>
                 
-                <div class="source-cite">Source: Kübler-Ross (1969) 《死亡與臨終》</div>
+                <div class="source-cite">Source: Kübler-Ross 哀傷五階段模型</div>
                 <div class="text-content">
-                    哀傷是...有時會感覺前進三步又後退兩步，但整體是向前行...<br>
-實際的復原歷程是<b>「非線性的」</b>，不會按特定次序發生，也可能不會經歷所有階段。<br>
-                    <br>👇 點擊下方文字查看不同階段的經歷。點擊「啟動」觀看雲朵在復原路上，有時前進三步又後退兩步，但整體向前行的真實軌跡。
+                    哀傷從來不是直線前進的。你可能會在以下五個階段來回穿梭，你不需要按次序走完這五個階段，也不會一瞬間完全「好了」。
                 </div>
-                <div class="svg-stage" style="height: 180px; background: #fff;">
-                    <svg class="stage-svg" viewBox="0 0 450 180">
-                        <!-- 理想軌跡 (透明虛線) -->
-                        <path d="M 40,90 L 410,90" fill="none" stroke="#d7bcfd" stroke-width="3" stroke-dasharray="8 6" opacity="0.6"/>
-                        
-                        <!-- 階段文字 (可點擊) -->
-                        <text x="30" y="130" class="stage-text" onclick="showStageDesc('否認')">否認</text>
-                        <text x="110" y="55" class="stage-text" onclick="showStageDesc('憤怒')">憤怒</text>
-                        <text x="180" y="130" class="stage-text" onclick="showStageDesc('討價還價')">討價還價</text>
-                        <text x="280" y="55" class="stage-text" onclick="showStageDesc('沮喪')">沮喪</text>
-                        <text x="370" y="130" class="stage-text" onclick="showStageDesc('接受')">接受</text>
-                        
-                        <!-- 移動的雲朵 (使用 Cloud.PNG 或備用圖形) -->
-                        <g id="cloudGroup" transform="translate(40, 90)">
-                            <!-- 如果有 Cloud.PNG，這行會顯示 -->
-                            <image href="Cloud.PNG" x="-20" y="-20" width="40" height="40" />
-                            <!-- 備用雲朵圖案 (以防圖片缺失) -->
-                            <text x="-12" y="6" font-size="20">☁️</text>
+                <div class="svg-stage" style="height: 180px;">
+                    <svg class="stage-svg" viewBox="0 0 450 200">
+                        <path id="curvyPath" d="M 40,140 Q 90,40 140,110 T 260,150 T 400,60" fill="none" stroke="#111" stroke-width="3.5" stroke-dasharray="6 5" stroke-linecap="round" />
+                        <text x="35" y="165" font-size="12" font-weight="bold" fill="#555">1. 否認</text>
+                        <text x="120" y="80" font-size="12" font-weight="bold" fill="#e63946">2. 憤怒</text>
+                        <text x="180" y="180" font-size="12" font-weight="bold" fill="#e76f51">3. 討價還價</text>
+                        <text x="300" y="170" font-size="12" font-weight="bold" fill="#457b9d">4. 沮喪</text>
+                        <text x="390" y="40" font-size="12" font-weight="bold" fill="#2a9d8f">5. 接受</text>
+                        <g id="cloudGroupCurvy" transform="translate(40, 140)">
+                            <image href="Cloud.PNG" x="-75" y="-60" width="150" height="120" />
                         </g>
                     </svg>
                 </div>
                 <div style="text-align: center;">
-                    <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()"> 啟動非線性復原軌跡 🚶‍♂️</button>
+                    <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()"> 一起走一趟哀傷復原路。 🚶‍♂️</button>
                 </div>
 
-                <div class="feedback-box" id="stage-feedback" style="background:#f0f9f4; border-color: #2a9d8f; margin-top: 15px;">
-                    🌱 每個人的復原歷程都是獨特的，允許自己有起有伏。
+                <div class="feedback-box" id="curvy-feedback" style="display:none; background:#f0f9f4; border-color: #2a9d8f; margin-top: 15px;">
+                    🌱 每個人的復原歷程都是獨特的，允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br>帶住這段經歷，你正在慢慢重新建立屬於自己的生活節奏。
                 </div>
             </div>
 
@@ -269,28 +233,27 @@
                     </ul>
                 </div>
 
-                <div class="svg-stage" id="swipe-stage" style="height: 180px;">
+                <div class="svg-stage" id="swipe-stage" style="height: 180px; cursor: grab;">
                     <svg class="stage-svg" viewBox="0 0 400 150">
                         <rect x="0" y="0" width="200" height="150" fill="#fcf3f3" opacity="0.6"/>
                         <rect x="200" y="0" width="200" height="150" fill="#f0f9f4" opacity="0.6"/>
                         
                         <text x="40" y="30" font-size="14" font-weight="bold" fill="#e63946" opacity="0.7">🌧️ 失落取向</text>
-                        <text x="280" y="30" font-size="14" font-weight="bold" fill="#2a9d8f" opacity="0.7">🌱 復原取向</text>
+                        <text x="300" y="30" font-size="14" font-weight="bold" fill="#2a9d8f" opacity="0.7">🌱 復原取向</text>
 
                         <circle cx="200" cy="10" r="5" fill="#111" />
                         <path d="M 180 10 L 220 10" stroke="#111" stroke-width="3" stroke-linecap="round"/>
                         <g id="pendulumGroup" style="transform-origin: 200px 10px; transform: rotate(0deg);">
                             <line x1="200" y1="10" x2="200" y2="80" stroke="#111" stroke-width="2.5" stroke-dasharray="4 3" />
-                            <g transform="translate(200, 80)">
-                                <circle cx="0" cy="15" r="30" fill="#fff" stroke="#111" stroke-width="3"/>
-                                <text x="-12" y="20" font-size="18">☁️</text>
+                            <g transform="translate(200, 100)">
+                                <image href="Cloud.PNG" x="-90" y="-75" width="180" height="150" />
                             </g>
                         </g>
                     </svg>
                 </div>
 
                 <div class="feedback-box" id="pendulum-feedback" style="background:#fff; border-color: #ccc;">
-                    👋 點擊下方按鈕觀看雙軌來回擺盪的過程。
+                    👋 觀看雙軌來回擺盪的過程。
                 </div>
 
                 <div style="text-align: center; margin-top: 15px;">
@@ -298,77 +261,98 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top:20px;">
-                <button class="action-btn" onclick="switchPage('page3')">大腦太累了，前往安放收納區休息 ➡️</button>
+            <!-- Step 2-C: 大腦神經可塑性 (Slider) -->
+            <div class="doodle-card">
+                <span class="zone-tag">Step 2-C：大腦解密 🧠</span>
+                <h2>心痛是真的，重塑也是真的</h2>
+                <div class="source-cite">Source: Ethan Kross (2011) / Neural Plasticity</div>
+                <div class="text-content">
+                    fMRI 掃描證實，經歷分離時，大腦負責<b>「生理疼痛」</b>的區域與<b>「杏仁核警報系統」</b>真的會被高度激活！你的痛不是錯覺。<br><br>
+                    但大腦擁有<b>「神經可塑性」</b>。拖動下方滑塊，看看當你「給予自己關懷」時，大腦會發生什麼變化？
+                </div>
+
+                <div class="svg-stage" style="height: 190px; background: #222; border-color: #444;">
+                    <svg viewBox="0 0 400 180">
+                        <path d="M120,100 C120,40 160,20 200,20 C240,20 280,40 280,100 C280,150 240,170 200,170 C160,170 120,150 120,100 Z" fill="none" stroke="#666" stroke-width="4" stroke-dasharray="8 6"/>
+                        
+                        <g id="pain-net">
+                            <circle cx="170" cy="80" r="14" fill="#e63946">
+                                <animate attributeName="r" values="12;16;12" dur="0.8s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="230" cy="110" r="18" fill="#e63946">
+                                <animate attributeName="r" values="15;19;15" dur="1s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="180" cy="130" r="10" fill="#e63946" />
+                            <path d="M170,80 L230,110 L180,130 Z" fill="none" stroke="#e63946" stroke-width="5" opacity="0.8"/>
+                        </g>
+
+                        <g id="heal-net" opacity="0">
+                            <circle cx="150" cy="120" r="12" fill="#2a9d8f" />
+                            <circle cx="210" cy="60" r="16" fill="#2a9d8f">
+                                <animate attributeName="r" values="14;17;14" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="250" cy="90" r="12" fill="#2a9d8f" />
+                            <circle cx="240" cy="140" r="9" fill="#2a9d8f" />
+                            <path d="M150,120 Q 180,80 210,60 T 250,90 T 240,140" fill="none" stroke="#2a9d8f" stroke-width="3" stroke-linecap="round"/>
+                            <text x="205" y="55" font-size="12">✨</text>
+                            <text x="140" y="115" font-size="10">🌱</text>
+                        </g>
+                    </svg>
+                </div>
+                
+                <input type="range" id="brainSlider" class="custom-slider" min="0" max="100" value="0" oninput="updateBrainState(this.value)">
+                
+                <div class="feedback-box" id="brain-feedback" style="background: #ffebe6; border-color: #e63946;">
+                    🚨 <b>警報期：</b>負責恐懼與警報的杏仁核過度活躍，大腦感受到如同肉體受傷般的實體痛楚，處於「戰或逃」狀態。
+                </div>
             </div>
+
+            <!-- Step 2-D: 互動繪圖 (Drawing Canvas) -->
+            <div class="doodle-card">
+                <span class="zone-tag">Step 2-D：重新築路 🛤️</span>
+                <h2>為大腦開闢新路徑</h2>
+                <div class="text-content">
+                    大腦神經迴路就像被走過無數次的小路。舊的痛苦習慣了被點亮，但你可以選擇開拓新路。<br>
+                    👇 <b>請用手指在畫布上滑動畫出一條新的神經迴路。</b>
+                </div>
+
+                <div class="svg-stage" id="draw-stage" style="height: 160px; touch-action: none; background: #fdfbf7;">
+                    <svg viewBox="0 0 400 160" id="draw-svg">
+                        <path d="M 40,80 L 120,40 L 200,120 L 280,50 L 360,90" fill="none" stroke="#e63946" stroke-width="8" stroke-dasharray="10 8" opacity="0.3"/>
+                        <text x="35" y="70" font-size="12" fill="#e63946" font-weight="bold">舊有神經迴路 ⛈️</text>
+                        <path id="user-path" d="" fill="none" stroke="#2a9d8f" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="feedback-box" id="draw-feedback">
+                    等待你開展新的生活及互動經驗... 🖌️
+                </div>
+            </div>
+
         </div>
 
-        <!-- ================= PAGE 3: 安放收納區 (自我關懷) ================= -->
+        <!-- ================= PAGE 3: 安放區 ================= -->
         <div id="page3" class="page">
-            
             <div class="doodle-card">
-                <span class="zone-tag">Step 3：安放收納區 📦</span>
-                <h2>心靈舊箱拆封：自我關懷</h2>
-                <div class="source-cite">Source: Kristin Neff (2003) 自我關懷</div>
+                <span class="zone-tag">Step 3：安放區 📦</span>
+                <h2>心靈盒子與自我關懷</h2>
+                <div class="quote-box">「對待受傷的自己，我們往往比對待朋友更加嚴苛。嘗試自我關懷。」</div>
+                <div class="source-cite">Source: Kristin Neff 自我關懷理論</div>
                 <div class="text-content">
-                    當面對關係分離與失去，大腦容易陷入自責或自憐：「是不是我做錯了甚麼？」、「為什麼發生於我身上？」。<br><br>
-                    心理學家鼓勵我們應像對待摰友般善待、接納自己。<b>自我關懷</b>能降低大腦警報，分泌催產素與安多酚，激活副交感神經，讓身體恢復平靜。
+                    面對關係分離，有哪些東西是你此刻很想「放下」的？是一個人？一個疑問？還是等不到的抱歉，抑或是一句對自己的安慰？
                 </div>
 
-                <div class="tag-category" style="margin-top: 20px;">👇 點擊拆開大腦習慣堆積的「舊思維」紙箱：</div>
+                <textarea class="doodle-textarea" id="self-note" placeholder="把它寫下來，暫時安放在這裡吧。"></textarea>
                 
-                <div class="boxes-container">
-                    <div class="box-item" onclick="unpackBox(this, 1)">📦<br><br>自我批判</div>
-                    <div class="box-item" onclick="unpackBox(this, 2)">📦<br><br>孤立感</div>
-                    <div class="box-item" onclick="unpackBox(this, 3)">📦<br><br>過度認同</div>
+                <div style="text-align: center;">
+                    <button class="action-btn" onclick="generateTape()">封存入心靈盒子 📦</button>
                 </div>
 
-                <div class="feedback-box" id="unpack-feedback" style="display:none; background: #fffbe6; border-color: #f4a261; text-align: left; align-items: flex-start;">
-                    <!-- 拆封內容 -->
-                </div>
-
-                <!-- 研究發現 -->
-                <div style="margin-top: 30px;">
-                    <h3 style="font-size: 16px; margin-bottom: 10px;">📊 研究發現，具自我關懷態度的人更可能：</h3>
-                    <div class="list-grid">
-                        <div>擁有穩定無條件的自我價值感</div>
-                        <div>面對困境堅強有韌性</div>
-                        <div>展現更高的情緒智商</div>
-                        <div>在衝突中尋求妥協方案</div>
-                        <div>有強壯的免疫系統及睡眠</div>
-                        <div>感受真實與親密感</div>
-                    </div>
+                <div id="postcard-box" style="display:none; margin-top: 18px; padding: 18px; background: #fffbe6; border: 2.5px dashed #111; border-radius: 12px; text-align: center;">
+                    <h3 style="margin-top:0;">已安放 🤍</h3>
+                    <p id="postcard-content" style="font-size: 14.5px; font-weight: 700; color: #111; line-height: 1.6;"></p>
                 </div>
             </div>
 
-            <!-- 如何培養自我關懷態度 -->
-            <div class="doodle-card">
-                <span class="zone-tag">🌱 實踐區</span>
-                <h2>如何培養自我關懷態度？</h2>
-                <div class="text-content">
-                    自我關懷是一種善意的修行，而非愉悅的享受。允許自己慢慢學習，為心靈重新「整理收納」：
-                </div>
-
-                <div class="metaphor-box">
-                    <h4>🧹 日常微整理（非正式練習）</h4>
-                    <p style="margin:0; font-size: 13px; color: #444;">在日常中進行「自我關懷休息」、透過寫作探索內心，或給予自己支持性的觸摸（例如雙手環抱自己）。</p>
-                </div>
-                
-                <div class="metaphor-box">
-                    <h4>🧽 深度大掃除（正式練習）</h4>
-                    <p style="margin:0; font-size: 13px; color: #444;">每天預留時間進行「慈愛呼吸法」，有意識地將善意吸入，將壓力呼出。</p>
-                </div>
-
-                <div class="metaphor-box" style="background: #fff5f5; border-color: #ffcccc;">
-                    <h4>⚠️ 打掃揚起的灰塵（回燃 Backdraft）</h4>
-                    <p style="margin:0; font-size: 13px; color: #444;">
-                        有些人起初練習時，痛苦反而會加劇。當我們敞開心屝讓愛湧入時，舊傷也隨之流出，這稱為「回燃」。<br>
-                        如果感到被負面情緒淹沒，請容許自己暫時抽身，專注呼吸、感受雙腳踩地，或喝杯茶安定自己。<b>這種照顧當下需要的態度，本身也是自我關懷。</b>
-                    </p>
-                </div>
-            </div>
-
-            <!-- 資源閣 -->
             <div class="doodle-card" style="background-color: #fdfbf7;">
                 <span class="zone-tag" style="background: #9ad5f8;">🎁 資源閣</span>
                 <h2>領取心靈資源禮品包</h2>
@@ -378,6 +362,15 @@
                     • <b>自我關懷提示卡 (7張) 及木架</b><br>
                     <br>帶住傷痕，繼續溫柔生活。🩹
                 </div>
+
+                <!-- 新增：社區資源按鈕區塊 -->
+                <div style="margin-top: 18px; text-align: center;">
+                    <a href="https://example.com/community-resources.pdf" target="_blank" style="text-decoration: none;">
+                        <button class="action-btn" style="background: #fffbe6; width: 100%; max-width: 320px; padding: 12px 16px; font-size: 13.5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span> 查看社區支援資源 </span> 🔗
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -386,8 +379,8 @@
     <!-- 底部導覽列 -->
     <div class="nav-bar">
         <button class="nav-btn active" onclick="switchPage('page1')">1. 攤開</button>
-        <button class="nav-btn" onclick="switchPage('page2')">2. 整理執拾</button>
-        <button class="nav-btn" onclick="switchPage('page3')">3. 安放收納</button>
+        <button class="nav-btn" onclick="switchPage('page2')">2. 整理</button>
+        <button class="nav-btn" onclick="switchPage('page3')">3. 安放</button>
     </div>
 
     <script>
@@ -413,68 +406,42 @@
             else feedback.innerHTML = `你選了 ${selectedCount} 個訊號。<br>你的身心正承受著巨大的壓力警報，請允許自己好好休息。`;
         }
 
-        // --- Page 2-A: Grief Stages (Non-linear animation + Descriptions) ---
-        const cloudGroup = document.getElementById('cloudGroup');
-        let linearAnimFrame = null;
-        
-        const stageDescriptions = {
-            '否認': '<b>否認：</b>「這不是真的…」這是大腦暫時的保護機制，用來緩衝突如其來的巨大衝擊。',
-            '憤怒': '<b>憤怒：</b>「為什麼是我？」將內心難以消化的痛楚，轉化為對外或對己的怒火。',
-            '討價還價': '<b>討價還價：</b>「如果當初…就好了。」試圖透過假設來尋求控制感，或挽回一絲希望。',
-            '沮喪': '<b>沮喪：</b>「做什麼都沒有意義了…」深刻意識到失去的真實性，感到深深的空虛與悲傷。',
-            '接受': '<b>接受：</b>「這發生了，但我會繼續前行。」不是忘記，而是學會與這份失去共存，重新適應生活。'
-        };
-
-        function showStageDesc(stageName) {
-            const feedbackBox = document.getElementById('stage-feedback');
-            feedbackBox.innerHTML = stageDescriptions[stageName];
-            feedbackBox.style.display = 'flex';
+        // --- Page 2-A: Curvy Path ---
+        const curvyPath = document.getElementById('curvyPath');
+        const cloudGroupCurvy = document.getElementById('cloudGroupCurvy');
+        let curvyAnimFrame = null;
+        function updateCloudOnPath(progress) {
+            const pathLength = curvyPath.getTotalLength();
+            progress = Math.max(0, Math.min(1, progress));
+            const point = curvyPath.getPointAtLength(progress * pathLength);
+            cloudGroupCurvy.setAttribute('transform', `translate(${point.x}, ${point.y})`);
         }
-
-        function updateCloudLinear(xPos, yPos) {
-            cloudGroup.setAttribute('transform', `translate(${xPos}, ${yPos})`);
-        }
+        updateCloudOnPath(0);
         
         function oscillateAlongPath() {
-            cancelAnimationFrame(linearAnimFrame);
+            cancelAnimationFrame(curvyAnimFrame);
             let startTime = null;
             
-            const feedbackBox = document.getElementById('stage-feedback');
-            feedbackBox.innerHTML = "🚶‍♂️ <b>實際復原歷程：</b>前進三步，後退兩步，但整體方向依然是向前邁進的。";
+            const feedbackBox = document.getElementById('curvy-feedback');
+            if(feedbackBox) feedbackBox.style.display = 'none';
 
-            function animateLinear(timestamp) {
+            function animateCurvy(timestamp) {
                 if (!startTime) startTime = timestamp;
-                let t = (timestamp - startTime) / 1000; // time in seconds
+                let t = (timestamp - startTime) / 1000;
+                let swing = 0.5 + 0.45 * Math.sin(t * 2) * Math.exp(-t * 0.15); 
+                updateCloudOnPath(swing);
                 
-                // Base progress (0 to 1 over 8 seconds)
-                let baseProgress = t / 8;
-                
-                // Add non-linear oscillation (sine wave that pushes forward and pulls back)
-                // Math.sin(t * frequency) * amplitude
-                let oscillation = 0.08 * Math.sin(t * Math.PI * 1.5); 
-                
-                let currentProgress = baseProgress + oscillation;
-                
-                // Clamp between 0 and 1
-                currentProgress = Math.max(0, Math.min(1, currentProgress));
-                
-                // Map to SVG coordinates (X: 40 to 410, Y: 90 constant base with slight bounce)
-                let x = 40 + (410 - 40) * currentProgress;
-                let y = 90 - 15 * Math.sin(t * Math.PI * 3); // slight vertical bounce
-
-                updateCloudLinear(x, y);
-                
-                if (t < 8.0) {
-                    linearAnimFrame = requestAnimationFrame(animateLinear);
+                if (t < 7.0) {
+                    curvyAnimFrame = requestAnimationFrame(animateCurvy);
                 } else {
-                    updateCloudLinear(410, 90);
-                    feedbackBox.innerHTML = "✨ 經歷了反反覆覆的拉扯，帶住這份經歷，你正在建立屬於自己的新生活。";
+                    updateCloudOnPath(1);
+                    if(feedbackBox) feedbackBox.style.display = 'flex';
                 }
             }
-            linearAnimFrame = requestAnimationFrame(animateLinear);
+            curvyAnimFrame = requestAnimationFrame(animateCurvy);
         }
 
-        // --- Page 2-B: DPM Animated Sequence (Fixed Swing Direction) ---
+        // --- Page 2-B: DPM Animated Sequence (Fast & Snappy for Gen Z) ---
         const pendulumGroup = document.getElementById('pendulumGroup');
         const penFeedback = document.getElementById('pendulum-feedback');
         let pendulumAnimId = null;
@@ -485,41 +452,38 @@
             
             function animatePendulum(timestamp) {
                 if (!startTime) startTime = timestamp;
-                let t = (timestamp - startTime) / 1000; 
+                let t = (timestamp - startTime) / 1000; // time in seconds
                 let angle = 0;
                 
-                // 負角度 = 左 (失落取向) | 正角度 = 右 (復原取向)
+                // Total duration reduced to ~7.5 seconds
                 if (t < 2.0) {
-                    // 初期：情緒在失落端劇烈擺盪 (向左/負數)
-                    angle = -35 * Math.cos(t * 7) * Math.exp(-t * 0.4);
-                    if (angle > 0) angle = -angle; // 強制偏向左側
+                    // Starts swung to LEFT (Loss side: negative angle) at t=0
+                    angle = -35 * Math.cos(t * 7) * Math.exp(-t * 0.4) - 5;
                     penFeedback.innerHTML = "🧭 <b>初期：</b>剛經歷分離，情緒在「失落端」劇烈擺盪";
                     penFeedback.style.background = "#fcf3f3";
                 } 
                 else if (t < 4.0) {
-                    // 適應期：重心移向復原取向 (向右/正數)
                     let localT = t - 2.0;
-                    let center = 25 * (1 - Math.exp(-localT * 2)); // 中心向右偏移
+                    let center = -5 + 25 * (1 - Math.exp(-localT * 2)); // Shift center to +20 (Restoration)
                     angle = center - 20 * Math.cos(localT * 5) * Math.exp(-localT * 0.8);
-                    penFeedback.innerHTML = "🌱 <b>適應期：</b>隨時間過去，重心慢慢移向「復原取向」。";
+                    penFeedback.innerHTML = "🌱 <b>適應期：</b>隨時間過去，擺盪減緩，重心移向「復原取向」。";
                     penFeedback.style.background = "#f0f9f4";
                 }
                 else if (t < 5.5) {
-                    // 觸發點：再次擺回失落取向 (突然向左/負數)
                     let localT = t - 4.0;
-                    angle = 20 - 45 * Math.sin((localT / 1.5) * Math.PI); // 從右(20)急降至左(-25)
+                    // Trigger point swings back to negative angle (Loss side)
+                    angle = 20 - 50 * Math.sin((localT / 1.5) * Math.PI);
                     penFeedback.innerHTML = "🌧️ <b>觸發點：</b>遇上節日或舊地重遊，仍會再次擺回「失落取向」...";
                     penFeedback.style.background = "#fcf3f3";
                 }
                 else if (t < 8.5) {
-                    // 長遠復原：擺回右側復原取向並穩定 (向右/正數)
                     let localT = t - 5.5;
-                    angle = -25 + 45 * (1 - Math.exp(-localT * 1.5)) - 10 * Math.sin(localT * 4) * Math.exp(-localT * 1.2);
+                    angle = 20 - 15 * Math.sin(localT * 4) * Math.exp(-localT * 1.2);
                     penFeedback.innerHTML = "🤍 <b>長遠復原：</b>接納偶爾的擺盪，帶著傷痕繼續溫柔生活。";
                     penFeedback.style.background = "#fdfbf7";
                 }
                 else {
-                    pendulumGroup.style.transform = `rotate(20deg)`; // 最終停留在復原取向(右)
+                    pendulumGroup.style.transform = `rotate(20deg)`;
                     return;
                 }
                 
@@ -529,59 +493,123 @@
             pendulumAnimId = requestAnimationFrame(animatePendulum);
         }
 
-        // --- Page 3: Self-Compassion Unboxing ---
-        const boxData = {
-            1: {
-                old: "自我批判",
-                newIcon: "☁️ 善待自己",
-                content: `<b>當我們遭受痛苦、失敗或感到不足時…</b><br><br>
-                          ❌ <b>舊習慣 (自我批判)：</b> 冷漠、苛責、忽視痛苦或自我批評。<br>
-                          ✅ <b>新視角 (善待自己)：</b> 給予溫暖及支持。就像對待一位好朋友、教練或導師一樣，給予幫助和鼓勵。這讓我們感到安全，以更好的心態應對挑戰。`
-            },
-            2: {
-                old: "孤立",
-                newIcon: "☁️ 共通人性",
-                content: `<b>當我們遭遇困境或犯錯時…</b><br><br>
-                          ❌ <b>舊習慣 (孤立)：</b> 產生揮之不去的孤獨感，彷彿「我」是世界上唯一承受這種痛苦的人。<br>
-                          ✅ <b>新視角 (共通人性)：</b> 所有人都會經歷苦難。「人」的定義本身就意味著脆弱和不完美。意識到我們的苦難將我們與他人連結起來，而不是隔離。`
-            },
-            3: {
-                old: "過度認同",
-                newIcon: "☁️ 靜觀",
-                content: `<b>面對生活的不完美與情緒時…</b><br><br>
-                          ❌ <b>舊習慣 (過度認同)：</b> 被負面情緒吞噬，完全認同於痛苦的想法。<br>
-                          ✅ <b>新視角 (靜觀)：</b> 放開慣常視角，以平衡的方式接納當下的現實。既不壓抑也不誇大痛苦，防止我們被情緒淹沒。`
-            }
-        };
+        // --- Page 2-C: Brain Plasticity Slider ---
+        const painNet = document.getElementById('pain-net');
+        const healNet = document.getElementById('heal-net');
+        const brainFeedback = document.getElementById('brain-feedback');
 
-     function unpackBox(element, boxId) {
-            const feedback = document.getElementById('unpack-feedback');
-            
-            // If the clicked box is ALREADY open, close it (revert to box)
-            if (element.classList.contains('box-opened')) {
-                element.classList.remove('box-opened');
-                element.innerHTML = `📦<br><br>${boxData[boxId].old}`;
-                feedback.style.display = 'none'; // Hide the description
-            } 
-            // If the clicked box is closed, open it (change to cloud)
-            else {
-                // Optional: Reset ALL boxes back to normal first (so only one is open at a time)
-                document.querySelectorAll('.box-item').forEach((box, index) => {
-                    box.classList.remove('box-opened');
-                    box.innerHTML = `📦<br><br>${boxData[index + 1].old}`;
+        function updateBrainState(val) {
+            let ratio = val / 100;
+            painNet.style.opacity = Math.max(0, 1 - (ratio * 1.5)); 
+            healNet.style.opacity = ratio;
+
+            if (val < 30) {
+                brainFeedback.innerHTML = "🚨 <b>警報期：</b>杏仁核過度活躍，大腦感受到如同肉體受傷般的實體痛楚。";
+                brainFeedback.style.background = "#ffebe6";
+                brainFeedback.style.borderColor = "#e63946";
+            } else if (val < 70) {
+                brainFeedback.innerHTML = "🕰️ <b>過渡期：</b>當你嘗試照顧自己或接觸新事物，大腦正悄悄建立新的神經連結。";
+                brainFeedback.style.background = "#fffbe6";
+                brainFeedback.style.borderColor = "#f4a261";
+            } else {
+                brainFeedback.innerHTML = "🌱 <b>重塑期：</b>神經可塑性發揮作用！新的情緒調節迴路變強，舊的痛覺連接逐漸削弱。";
+                brainFeedback.style.background = "#f0f9f4";
+                brainFeedback.style.borderColor = "#2a9d8f";
+            }
+        }
+
+        // --- Page 2-D: Drawing Canvas ---
+        const drawSvg = document.getElementById('draw-svg');
+        const userPath = document.getElementById('user-path');
+        const drawFeedback = document.getElementById('draw-feedback');
+        let isDrawing = false;
+        let drawPoints = [];
+
+        function getMousePos(evt) {
+            let CTM = drawSvg.getScreenCTM();
+            let x = evt.touches ? evt.touches[0].clientX : evt.clientX;
+            let y = evt.touches ? evt.touches[0].clientY : evt.clientY;
+            return { x: (x - CTM.e) / CTM.a, y: (y - CTM.f) / CTM.d };
+        }
+
+        function startDraw(e) {
+            isDrawing = true;
+            drawPoints = [];
+            drawPoints.push(getMousePos(e));
+            updateDrawPath();
+            drawFeedback.innerHTML = "正在繪製新的修復路徑... ✍️";
+            drawFeedback.style.background = "#e8f4fd";
+        }
+
+        function draw(e) {
+            if(!isDrawing) return;
+            e.preventDefault(); 
+            drawPoints.push(getMousePos(e));
+            updateDrawPath();
+        }
+
+        function endDraw() {
+            if(!isDrawing) return;
+            isDrawing = false;
+            if(drawPoints.length > 15) {
+                drawFeedback.innerHTML = "✨「每一次你照顧自己，都是在為大腦鋪設這條新的神經迴路。大腦會記住這份溫柔。」";
+                drawFeedback.style.background = "#f0f9f4";
+            } else {
+                drawFeedback.innerHTML = "畫得太短了，試著畫一條長一點的連線吧！";
+            }
+        }
+
+        function updateDrawPath() {
+            if(drawPoints.length < 2) return;
+            let d = `M ${drawPoints[0].x} ${drawPoints[0].y}`;
+            for(let i=1; i<drawPoints.length; i++) {
+                d += ` L ${drawPoints[i].x} ${drawPoints[i].y}`;
+            }
+            userPath.setAttribute('d', d);
+        }
+
+        drawSvg.addEventListener('mousedown', startDraw);
+        drawSvg.addEventListener('mousemove', draw);
+        window.addEventListener('mouseup', endDraw);
+        drawSvg.addEventListener('touchstart', startDraw, {passive: false});
+        drawSvg.addEventListener('touchmove', draw, {passive: false});
+        window.addEventListener('touchend', endDraw);
+
+        // --- Page 3: Tape Generation ---
+        function generateTape() {
+            const note = document.getElementById('self-note').value;
+            if (note.trim() === "") {
+                alert("請寫下你想安放的話 🤍");
+                return;
+            }
+
+            const btn = document.querySelector('.action-btn[onclick="generateTape()"]');
+            const originalText = btn.innerText;
+            btn.innerText = "正在封存中... 📦";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzR2MXpmBoisKX5R3Y5zRDj32yaKqPd7EmL4-N70rDekjvlx0a-gwmdmOoKTED-k74/exec';
+
+            let formData = new FormData();
+            formData.append('message', note);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    document.getElementById('postcard-content').innerText = `「${note}」`;
+                    document.getElementById('postcard-box').style.display = 'block';
+                    document.getElementById('self-note').value = "";
+                    
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                })
+                .catch(error => {
+                    alert("封存失敗，請檢查網路連線後重試 🤍");
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
                 });
-
-                // Update the clicked box to Cloud
-                element.innerHTML = boxData[boxId].newIcon;
-                element.classList.add('box-opened');
-                
-                // Show the corresponding content
-                feedback.style.display = 'flex';
-                feedback.style.animation = 'none';
-                void feedback.offsetWidth; // Trigger reflow to restart animation
-                feedback.style.animation = 'fadeIn 0.5s ease forwards';
-                feedback.innerHTML = boxData[boxId].content;
-            }
         }
     </script>
 </body>
