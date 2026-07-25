@@ -120,10 +120,24 @@
             border-radius: 50%; background: #9ad5f8; border: 3px solid #111; cursor: pointer; box-shadow: 2px 2px 0px #111;
         }
 
-        .doodle-textarea {
-            width: 100%; height: 100px; border: 2.5px solid #111; border-radius: 10px; padding: 12px;
-            font-size: 14px; resize: none; margin-bottom: 12px;
+        /* Unboxing Section Styles */
+        .boxes-container {
+            display: flex; justify-content: space-around; padding: 10px 0; margin-bottom: 15px;
         }
+        .box-item {
+            font-size: 45px; cursor: pointer; transition: transform 0.2s; user-select: none;
+            filter: drop-shadow(2px 2px 0px #111);
+        }
+        .box-item:hover, .box-item:active { transform: scale(1.1) rotate(-5deg); }
+        .box-opened { pointer-events: none; opacity: 0.8; filter: none; font-size: 40px;}
+        
+        @keyframes popOut {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        .unpack-msg-animate { animation: popOut 0.4s ease forwards; }
+
     </style>
 </head>
 <body>
@@ -133,7 +147,7 @@
         <div class="header">
             <span class="org-badge">The Space for Relationship Loss and Self-integration</span>
             <h1>關係失去整理所 🩹</h1>
-            <p style="margin-bottom:0;">帶住傷痕，溫柔整理。</p>
+            <p style="margin-bottom:0;">以心理學及腦神經科學理解「分離」及「失去」</p>
         </div>
 
         <!-- ================= PAGE 1: 攤開區 ================= -->
@@ -144,7 +158,7 @@
                 <div class="quote-box">「明明只是分開了，為何個心會翳悶，甚至頭昏腦脹……是我的身體出了問題嗎？」</div>
                 <div class="text-content">
                     當一段重要的關係結束，我們承受的往往不只是單一的情緒。昔日美好的回憶與當下的落差，加上自己對將來的期望落差，會在短時間內形成巨大的心理壓力。
-                    <br> <br> 請溫柔地告訴自己：這些「不尋常」的身心症狀，其實是我在面對不尋常壓力時的「正常」反應。
+                    <br> <br> 請溫柔地告訴自己：這些「不尋常」的身心症狀，其實是在面對不尋常壓力時的「正常」反應。
                 </div>
                 
                 <div class="tag-category">👀 你最近有經歷過以下【身體】訊號嗎？（可多選）</div>
@@ -187,31 +201,41 @@
         <!-- ================= PAGE 2: 整理區 ================= -->
         <div id="page2" class="page">
             
-            <!-- Step 2-A: 非線性的哀傷歷程 -->
+            <!-- Step 2-A: 哀傷的五個階段模型 (Updated) -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 2-A：非線性軌跡 🌊</span>
-                <h2>非線性的哀傷歷程</h2>
+                <h2>哀傷的五個階段模型</h2>
                 <div class="quote-box">「明明昨天好像好轉了，為什麼今天又突然崩潰？我是否退步了？」</div>
                 
-                <div class="source-cite">Source: Kübler-Ross 哀傷五階段模型</div>
+                <div class="source-cite">Source: Kübler-Ross (1969) 《死亡與臨終》</div>
                 <div class="text-content">
-                    哀傷從來不是直線前進的。你可能會在以下五個階段來回穿梭，你不需要按次序走完這五個階段，也不會一瞬間完全「好了」。
+                    精神科醫生伊莉莎白‧庫伯勒─羅絲於1969年出版《死亡與臨終》一書，當中以「哀傷的五個階段模型」來描述絕症病人面臨自己的死亡。此模型及後被應用於去理解一般哀傷的方式。<br><br>
+                    這些階段是<b>「非線性的」</b>，不會按特定次序發生。你可能不會經歷所有階段，有時會感覺前進三步又後退兩步，但整體是向前行的。
                 </div>
-                <div class="svg-stage" style="height: 180px;">
+                <div class="svg-stage" style="height: 200px; background: #fff;">
                     <svg class="stage-svg" viewBox="0 0 450 200">
-                        <path id="curvyPath" d="M 40,140 Q 90,40 140,110 T 260,150 T 400,60" fill="none" stroke="#111" stroke-width="3.5" stroke-dasharray="6 5" stroke-linecap="round" />
-                        <text x="35" y="165" font-size="12" font-weight="bold" fill="#555">1. 否認</text>
-                        <text x="120" y="80" font-size="12" font-weight="bold" fill="#e63946">2. 憤怒</text>
-                        <text x="180" y="180" font-size="12" font-weight="bold" fill="#e76f51">3. 討價還價</text>
-                        <text x="300" y="170" font-size="12" font-weight="bold" fill="#457b9d">4. 沮喪</text>
-                        <text x="390" y="40" font-size="12" font-weight="bold" fill="#2a9d8f">5. 接受</text>
-                        <g id="cloudGroupCurvy" transform="translate(40, 140)">
-                            <image href="Cloud.PNG" x="-75" y="-60" width="150" height="120" />
+                        <!-- 直線進程 (紫色) -->
+                        <path d="M 50,70 L 120,150 L 200,80 L 300,160 L 400,70" fill="none" stroke="#d7bcfd" stroke-width="2.5" />
+                        
+                        <!-- 混亂糾結的曲線 (藍色) -->
+                        <path id="curvyPath" d="M 40,80 C 70,60, 30,120, 60,110 C 90,100, 30,140, 90,140 C 130,140, 100,70, 150,80 C 190,90, 220,130, 260,110 C 290,90, 240,160, 260,170 C 280,180, 310,180, 330,140 C 350,100, 310,60, 360,70 C 400,80, 420,150, 410,160 C 400,170, 370,120, 420,90" fill="none" stroke="#5fa6e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        
+                        <!-- 標籤文字 -->
+                        <text x="40" y="60" font-size="14" font-weight="bold" fill="#333">否認</text>
+                        <text x="135" y="170" font-size="14" font-weight="bold" fill="#333">憤怒</text>
+                        <text x="180" y="55" font-size="14" font-weight="bold" fill="#333">討價還價</text>
+                        <text x="320" y="185" font-size="14" font-weight="bold" fill="#333">沮喪</text>
+                        <text x="390" y="55" font-size="14" font-weight="bold" fill="#333">接受</text>
+                        
+                        <!-- 移動的物件 -->
+                        <g id="cloudGroupCurvy" transform="translate(40, 80)">
+                            <circle cx="0" cy="0" r="14" fill="#111" />
+                            <text x="-7" y="4" font-size="11" fill="#fff" font-weight="bold">你</text>
                         </g>
                     </svg>
                 </div>
                 <div style="text-align: center;">
-                    <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()"> 一起走一趟哀傷復原路。 🚶‍♂️</button>
+                    <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()"> 體驗進進退退的歷程 🚶‍♂️</button>
                 </div>
 
                 <div class="feedback-box" id="curvy-feedback" style="display:none; background:#f0f9f4; border-color: #2a9d8f; margin-top: 15px;">
@@ -245,8 +269,10 @@
                         <path d="M 180 10 L 220 10" stroke="#111" stroke-width="3" stroke-linecap="round"/>
                         <g id="pendulumGroup" style="transform-origin: 200px 10px; transform: rotate(0deg);">
                             <line x1="200" y1="10" x2="200" y2="80" stroke="#111" stroke-width="2.5" stroke-dasharray="4 3" />
-                            <g transform="translate(200, 100)">
-                                <image href="Cloud.PNG" x="-90" y="-75" width="180" height="150" />
+                            <g transform="translate(200, 80)">
+                                <!-- Simplified graphic instead of missing image -->
+                                <circle cx="0" cy="15" r="30" fill="#fff" stroke="#111" stroke-width="3"/>
+                                <text x="-12" y="20" font-size="18">☁️</text>
                             </g>
                         </g>
                     </svg>
@@ -332,27 +358,27 @@
 
         <!-- ================= PAGE 3: 安放區 ================= -->
         <div id="page3" class="page">
+            
+            <!-- 新增：心靈舊箱拆封互動區 -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 3：安放區 📦</span>
-                <h2>心靈盒子與自我關懷</h2>
-                <div class="quote-box">「對待受傷的自己，我們往往比對待朋友更加嚴苛。嘗試自我關懷。」</div>
-                <div class="source-cite">Source: Kristin Neff 自我關懷理論</div>
+                <h2>心靈舊箱拆封</h2>
                 <div class="text-content">
-                    面對關係分離，有哪些東西是你此刻很想「放下」的？是一個人？一個疑問？還是等不到的抱歉，抑或是一句對自己的安慰？
+                    在關係結束後，我們心裡常堆積著未處理的情緒舊箱。請點擊下方的紙箱，輕輕拆封，看看裡面藏著什麼需要被看見的心理學聲音。
                 </div>
 
-                <textarea class="doodle-textarea" id="self-note" placeholder="把它寫下來，暫時安放在這裡吧。"></textarea>
-                
-                <div style="text-align: center;">
-                    <button class="action-btn" onclick="generateTape()">封存入心靈盒子 📦</button>
+                <div class="boxes-container">
+                    <div class="box-item" onclick="unpackBox(this, '其實你已經做得很好了。這份痛楚，是因為你曾經真心付出。')">📦</div>
+                    <div class="box-item" onclick="unpackBox(this, '允許自己有時會退步。非線性的哀傷歷程，代表你仍在前進的路上。')">📦</div>
+                    <div class="box-item" onclick="unpackBox(this, '大腦正在為你重新築路。每一次你照顧自己，都在建立新的神經連結。')">📦</div>
                 </div>
 
-                <div id="postcard-box" style="display:none; margin-top: 18px; padding: 18px; background: #fffbe6; border: 2.5px dashed #111; border-radius: 12px; text-align: center;">
-                    <h3 style="margin-top:0;">已安放 🤍</h3>
-                    <p id="postcard-content" style="font-size: 14.5px; font-weight: 700; color: #111; line-height: 1.6;"></p>
+                <div class="feedback-box" id="unpack-feedback" style="display:none; background: #fffbe6; border-color: #f4a261;">
+                    <!-- 拆封內容將在此顯示 -->
                 </div>
             </div>
 
+            <!-- 資源閣 -->
             <div class="doodle-card" style="background-color: #fdfbf7;">
                 <span class="zone-tag" style="background: #9ad5f8;">🎁 資源閣</span>
                 <h2>領取心靈資源禮品包</h2>
@@ -363,9 +389,8 @@
                     <br>帶住傷痕，繼續溫柔生活。🩹
                 </div>
 
-                <!-- 新增：社區資源按鈕區塊 -->
                 <div style="margin-top: 18px; text-align: center;">
-                    <a href="https://example.com/community-resources.pdf" target="_blank" style="text-decoration: none;">
+                    <a href="#" target="_blank" style="text-decoration: none;">
                         <button class="action-btn" style="background: #fffbe6; width: 100%; max-width: 320px; padding: 12px 16px; font-size: 13.5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
                             <span> 查看社區支援資源 </span> 🔗
                         </button>
@@ -406,16 +431,18 @@
             else feedback.innerHTML = `你選了 ${selectedCount} 個訊號。<br>你的身心正承受著巨大的壓力警報，請允許自己好好休息。`;
         }
 
-        // --- Page 2-A: Curvy Path ---
+        // --- Page 2-A: Curvy Path (Updated) ---
         const curvyPath = document.getElementById('curvyPath');
         const cloudGroupCurvy = document.getElementById('cloudGroupCurvy');
         let curvyAnimFrame = null;
+        
         function updateCloudOnPath(progress) {
             const pathLength = curvyPath.getTotalLength();
             progress = Math.max(0, Math.min(1, progress));
             const point = curvyPath.getPointAtLength(progress * pathLength);
             cloudGroupCurvy.setAttribute('transform', `translate(${point.x}, ${point.y})`);
         }
+        // 初始化停留在起點
         updateCloudOnPath(0);
         
         function oscillateAlongPath() {
@@ -428,6 +455,7 @@
             function animateCurvy(timestamp) {
                 if (!startTime) startTime = timestamp;
                 let t = (timestamp - startTime) / 1000;
+                // 利用數學公式模擬前進又後退的過程，最終走向 1.0 (終點)
                 let swing = 0.5 + 0.45 * Math.sin(t * 2) * Math.exp(-t * 0.15); 
                 updateCloudOnPath(swing);
                 
@@ -441,7 +469,7 @@
             curvyAnimFrame = requestAnimationFrame(animateCurvy);
         }
 
-        // --- Page 2-B: DPM Animated Sequence (Fast & Snappy for Gen Z) ---
+        // --- Page 2-B: DPM Animated Sequence ---
         const pendulumGroup = document.getElementById('pendulumGroup');
         const penFeedback = document.getElementById('pendulum-feedback');
         let pendulumAnimId = null;
@@ -452,26 +480,23 @@
             
             function animatePendulum(timestamp) {
                 if (!startTime) startTime = timestamp;
-                let t = (timestamp - startTime) / 1000; // time in seconds
+                let t = (timestamp - startTime) / 1000; 
                 let angle = 0;
                 
-                // Total duration reduced to ~7.5 seconds
                 if (t < 2.0) {
-                    // Starts swung to LEFT (Loss side: negative angle) at t=0
                     angle = -35 * Math.cos(t * 7) * Math.exp(-t * 0.4) - 5;
                     penFeedback.innerHTML = "🧭 <b>初期：</b>剛經歷分離，情緒在「失落端」劇烈擺盪";
                     penFeedback.style.background = "#fcf3f3";
                 } 
                 else if (t < 4.0) {
                     let localT = t - 2.0;
-                    let center = -5 + 25 * (1 - Math.exp(-localT * 2)); // Shift center to +20 (Restoration)
+                    let center = -5 + 25 * (1 - Math.exp(-localT * 2)); 
                     angle = center - 20 * Math.cos(localT * 5) * Math.exp(-localT * 0.8);
                     penFeedback.innerHTML = "🌱 <b>適應期：</b>隨時間過去，擺盪減緩，重心移向「復原取向」。";
                     penFeedback.style.background = "#f0f9f4";
                 }
                 else if (t < 5.5) {
                     let localT = t - 4.0;
-                    // Trigger point swings back to negative angle (Loss side)
                     angle = 20 - 50 * Math.sin((localT / 1.5) * Math.PI);
                     penFeedback.innerHTML = "🌧️ <b>觸發點：</b>遇上節日或舊地重遊，仍會再次擺回「失落取向」...";
                     penFeedback.style.background = "#fcf3f3";
@@ -575,41 +600,22 @@
         drawSvg.addEventListener('touchmove', draw, {passive: false});
         window.addEventListener('touchend', endDraw);
 
-        // --- Page 3: Tape Generation ---
-        function generateTape() {
-            const note = document.getElementById('self-note').value;
-            if (note.trim() === "") {
-                alert("請寫下你想安放的話 🤍");
-                return;
-            }
-
-            const btn = document.querySelector('.action-btn[onclick="generateTape()"]');
-            const originalText = btn.innerText;
-            btn.innerText = "正在封存中... 📦";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
-
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzR2MXpmBoisKX5R3Y5zRDj32yaKqPd7EmL4-N70rDekjvlx0a-gwmdmOoKTED-k74/exec';
-
-            let formData = new FormData();
-            formData.append('message', note);
-
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => {
-                    document.getElementById('postcard-content').innerText = `「${note}」`;
-                    document.getElementById('postcard-box').style.display = 'block';
-                    document.getElementById('self-note').value = "";
-                    
-                    btn.innerText = originalText;
-                    btn.style.opacity = "1";
-                    btn.disabled = false;
-                })
-                .catch(error => {
-                    alert("封存失敗，請檢查網路連線後重試 🤍");
-                    btn.innerText = originalText;
-                    btn.style.opacity = "1";
-                    btn.disabled = false;
-                });
+        // --- Page 3: Unboxing Interaction ---
+        function unpackBox(element, message) {
+            // 變更圖示與樣式
+            element.innerHTML = '✨';
+            element.classList.add('box-opened');
+            
+            // 顯示反饋訊息，加入動畫
+            const feedback = document.getElementById('unpack-feedback');
+            feedback.style.display = 'block';
+            
+            // 重新觸發動畫的技巧
+            feedback.classList.remove('unpack-msg-animate');
+            void feedback.offsetWidth; 
+            feedback.classList.add('unpack-msg-animate');
+            
+            feedback.innerHTML = `<span style="font-size:16px;">🤍</span><br><b>來自舊箱的訊息：</b><br><br>「${message}」`;
         }
     </script>
 </body>
