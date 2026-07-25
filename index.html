@@ -132,7 +132,12 @@
             font-size: 13px; font-weight: bold; color: #555;
         }
         .box-item:hover, .box-item:active { transform: translateY(-3px); background: #fdf5d3; }
-        .box-opened { background: #f0f9f4; border-color: #2a9d8f; pointer-events: none; color: #2a9d8f; }
+       .box-opened { 
+            background: #f0f9f4; 
+            border-color: #2a9d8f; 
+            color: #2a9d8f; 
+            /* Removed pointer-events: none; so it can be clicked again */
+        }
 
         .list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12.5px; }
         .list-grid div { background: #f0f4f8; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #9ad5f8;}
@@ -186,8 +191,8 @@
                     <button class="tag-btn" onclick="toggleSymptom(this)">羞恥</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">害怕</button>
                     <button class="tag-btn" onclick="toggleSymptom(this)">孤單</button>
-                整理
-                <br>
+                 </div>
+    
 
                 <div class="tag-category">🚶‍♂️ 那【行為】上呢？（可多選）</div>
                 <div class="tags-grid" id="behavior-tags">
@@ -549,21 +554,34 @@
             }
         };
 
-        function unpackBox(element, boxId) {
-            // 更新紙箱外觀為雲朵狀態
-            element.innerHTML = boxData[boxId].newIcon;
-            element.classList.add('box-opened');
-            
-            // 顯示對應的內容
+     function unpackBox(element, boxId) {
             const feedback = document.getElementById('unpack-feedback');
-            feedback.style.display = 'flex';
             
-            // 重置動畫
-            feedback.style.animation = 'none';
-            void feedback.offsetWidth; 
-            feedback.style.animation = 'fadeIn 0.5s ease forwards';
-            
-            feedback.innerHTML = boxData[boxId].content;
+            // If the clicked box is ALREADY open, close it (revert to box)
+            if (element.classList.contains('box-opened')) {
+                element.classList.remove('box-opened');
+                element.innerHTML = `📦<br><br>${boxData[boxId].old}`;
+                feedback.style.display = 'none'; // Hide the description
+            } 
+            // If the clicked box is closed, open it (change to cloud)
+            else {
+                // Optional: Reset ALL boxes back to normal first (so only one is open at a time)
+                document.querySelectorAll('.box-item').forEach((box, index) => {
+                    box.classList.remove('box-opened');
+                    box.innerHTML = `📦<br><br>${boxData[index + 1].old}`;
+                });
+
+                // Update the clicked box to Cloud
+                element.innerHTML = boxData[boxId].newIcon;
+                element.classList.add('box-opened');
+                
+                // Show the corresponding content
+                feedback.style.display = 'flex';
+                feedback.style.animation = 'none';
+                void feedback.offsetWidth; // Trigger reflow to restart animation
+                feedback.style.animation = 'fadeIn 0.5s ease forwards';
+                feedback.innerHTML = boxData[boxId].content;
+            }
         }
     </script>
 </body>
