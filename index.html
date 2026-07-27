@@ -806,14 +806,14 @@
         ];
         const walkDuration = walkKeyframes[walkKeyframes.length - 1].t;
 
-        // 氣泡訊息（按行程階段顯示・書面語）
-        const phaseMessages = [
-            { idx: 0, html: "🚶 出發了……你的路線會如何走，沒有人能預先知道。", style: "walk" },
-            { idx: 1, html: "🌀 <b>感覺好像退步了？</b> 有時會感覺前進三步又後退兩步，但整體是向前行<br></b>", style: "trigger" },
-            { idx: 2, html: "🚶 再次前行。, style: "walk" },
-            { idx: 3, html: "🌀 <b>不要緊，不用急。<br>來回搖擺，本來就是復原的一部分。", style: "trigger" },
-            { idx: 4, html: "🚶 帶著經歷，繼續向前……", style: "walk" }
-        ];
+       // 氣泡訊息（按行程階段顯示・書面語）
+const phaseMessages = [
+    { idx: 0, html: "🚶 出發了……你的路線會如何走，沒有人能預先知道。", style: "walk" },
+    { idx: 1, html: "🌀 <b>感覺好像退步了？</b> 有時會感覺前進三步又後退兩步，但整體是向前行", style: "trigger" },
+    { idx: 2, html: "🚶 再次前行。", style: "walk" },
+    { idx: 3, html: "🌀 <b>不要緊，不用急。</b><br>來回搖擺，本來就是復原的一部分。", style: "trigger" },
+    { idx: 4, html: "🚶 帶著經歷，繼續向前……", style: "walk" }
+];
 
         function setBubbleStyle(styleName) {
             if (styleName === "trigger") {
@@ -902,7 +902,7 @@
                     curvyAnimFrame = requestAnimationFrame(animateWalk);
                 } else {
                     // ★ 終點：簡短回望訊息（不用「標準答案」總結）
-                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。每個人的復原歷程都是獨特的，允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br></b>";
+triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。每個人的復原歷程都是獨特的，允許自己在修復路上有起有伏，溫柔包容自己的反覆。";
                     setBubbleStyle("end");
                     if (feedbackBox) feedbackBox.style.display = 'flex';
                 }
