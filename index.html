@@ -104,7 +104,7 @@
 
         /* SVG Stage */
         .svg-stage {
-            width: 100%; height: 210px; position: relative; margin: 10px 0;
+            width: 100%; position: relative; margin: 10px 0;
             background: #fafafa; border: 2px dashed #ccc; border-radius: 12px;
             touch-action: pan-y; overflow: hidden;
         }
@@ -187,35 +187,40 @@
         <!-- ================= PAGE 2: 整理區 ================= -->
         <div id="page2" class="page">
             
-            <!-- Step 2-A: 非線性的哀傷歷程 -->
+            <!-- Step 2-A: 非線性的哀傷歷程 (Updated) -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 2-A：非線性軌跡 🌊</span>
                 <h2>非線性的哀傷歷程</h2>
                 <div class="quote-box">「明明昨天好像好轉了，為什麼今天又突然崩潰？我是否退步了？」</div>
                 
-                <div class="source-cite">Source: Kübler-Ross 哀傷五階段模型</div>
+                <div class="source-cite">參考來源: 20201221_社工學聯_哀傷輔導.pdf[cite: 5]</div>
                 <div class="text-content">
-                    哀傷從來不是直線前進的。你可能會在以下五個階段來回穿梭，你不需要按次序走完這五個階段，也不會一瞬間完全「好了」。
+                    哀傷是不能夠被醫治或解決的，因為它並非疾病或問題；哀傷其實是人生中一個重大的轉變，所以人只能夠透過時間，努力去慢慢適應[cite: 5]。Elisabeth Kübler-Ross 提出的悲傷的五個階段（否定、憤怒、討價還價、沮喪、接受），其實悲傷沒有正確的方式或時間[cite: 5]。
+                    <br><br>
+                    理想的復原看似一條穩定的點狀線，但就如 <code>image_e6b61d.png</code> 所啟發的意象，<b>真實的復原軌跡（下方藍線）</b>是充滿波動的。這是一個「前進三步又後退兩步」的跳躍性過程，你不一定會經歷所有階段，也不會按固定次序前進。但請相信，整體的趨勢依然是向上、向前行的。
                 </div>
-                <div class="svg-stage" style="height: 180px;">
-                    <svg class="stage-svg" viewBox="0 0 450 200">
-                        <path id="curvyPath" d="M 40,140 Q 90,40 140,110 T 260,150 T 400,60" fill="none" stroke="#111" stroke-width="3.5" stroke-dasharray="6 5" stroke-linecap="round" />
-                        <text x="35" y="165" font-size="12" font-weight="bold" fill="#555">1. 否認</text>
-                        <text x="120" y="80" font-size="12" font-weight="bold" fill="#e63946">2. 憤怒</text>
-                        <text x="180" y="180" font-size="12" font-weight="bold" fill="#e76f51">3. 討價還價</text>
-                        <text x="300" y="170" font-size="12" font-weight="bold" fill="#457b9d">4. 沮喪</text>
-                        <text x="390" y="40" font-size="12" font-weight="bold" fill="#2a9d8f">5. 接受</text>
-                        <g id="cloudGroupCurvy" transform="translate(40, 140)">
+                
+                <div class="svg-stage" style="height: 250px;">
+                    <svg class="stage-svg" viewBox="0 0 450 250">
+                        <!-- 動態生成的 理想復原線 (y_baseline) 與 真實波動線 (y_actual) -->
+                        <path id="idealPath" fill="none" stroke="#aaa" stroke-width="3" stroke-dasharray="6 5" stroke-linecap="round" />
+                        <path id="actualPath" fill="none" stroke="#457b9d" stroke-width="4.5" stroke-linecap="round" />
+                        
+                        <!-- 註解群組：標示谷底與峰值 -->
+                        <g id="annotations-group"></g>
+
+                        <!-- Cloud 雲朵物件 (沿著藍線跑) -->
+                        <g id="cloudGroupCurvy" transform="translate(40, 200)">
                             <image href="Cloud.PNG" x="-75" y="-60" width="150" height="120" />
                         </g>
                     </svg>
                 </div>
                 <div style="text-align: center;">
-                    <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()"> 一起走一趟哀傷復原路。 🚶‍♂️</button>
+                    <button class="action-btn" style="padding: 6px 12px; font-size:12px;" onclick="oscillateAlongPath()"> 一起走一趟真實復原路。 🚶‍♂️</button>
                 </div>
 
                 <div class="feedback-box" id="curvy-feedback" style="display:none; background:#f0f9f4; border-color: #2a9d8f; margin-top: 15px;">
-                    🌱 每個人的復原歷程都是獨特的，允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br>帶住這段經歷，你正在慢慢重新建立屬於自己的生活節奏。
+                    🌱 每個人的復原歷程都是獨特的，允許自己在修復路上有起有伏，跳躍或重播某些情緒。<br>這不是退步，而是你正在動態地重新建立屬於自己的生活。
                 </div>
             </div>
 
@@ -363,7 +368,6 @@
                     <br>帶住傷痕，繼續溫柔生活。🩹
                 </div>
 
-                <!-- 新增：社區資源按鈕區塊 -->
                 <div style="margin-top: 18px; text-align: center;">
                     <a href="https://example.com/community-resources.pdf" target="_blank" style="text-decoration: none;">
                         <button class="action-btn" style="background: #fffbe6; width: 100%; max-width: 320px; padding: 12px 16px; font-size: 13.5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
@@ -406,14 +410,66 @@
             else feedback.innerHTML = `你選了 ${selectedCount} 個訊號。<br>你的身心正承受著巨大的壓力警報，請允許自己好好休息。`;
         }
 
-        // --- Page 2-A: Curvy Path ---
-        const curvyPath = document.getElementById('curvyPath');
+        // --- Page 2-A: Programmatic Wave Generation (y_actual / y_baseline) ---
+        function generateGriefPaths() {
+            const pathLen = 350;
+            const startX = 40;
+            // 起點 (40, 200)，終點預計向右上行 (較小的 Y)
+            let idealD = `M ${startX} 200`;
+            let actualD = `M ${startX} 200`;
+            
+            for(let x = startX; x <= startX + pathLen; x += 5) {
+                let progress = (x - startX) / pathLen; 
+                
+                // 1. y_baseline: 理想復原歷程 (斜率向上/即 SVG 中 Y 遞減)
+                let y_baseline = 200 - (150 * progress);
+                
+                // 2. y_actual: 透過波形函數疊加創造上下波動 (高頻 + 低頻正弦波)
+                let wave1 = 35 * Math.sin(progress * Math.PI * 4);    // 較大的低頻起伏
+                let wave2 = 15 * Math.sin(progress * Math.PI * 9.5);  // 較小的高頻波動
+                let y_actual = y_baseline - wave1 - wave2;
+                
+                idealD += ` L ${x} ${y_baseline}`;
+                actualD += ` L ${x} ${y_actual}`;
+            }
+
+            document.getElementById('idealPath').setAttribute('d', idealD);
+            document.getElementById('actualPath').setAttribute('d', actualD);
+            
+            // 3. Annotate 文字標註精準指向
+            const annotationsGroup = document.getElementById('annotations-group');
+            annotationsGroup.innerHTML = `
+                <!-- 背景 5 階段標示 -->
+                <text x="35" y="210" font-size="12" font-weight="bold" fill="#aaa">1.否認</text>
+                <text x="110" y="180" font-size="12" font-weight="bold" fill="#aaa">2.憤怒</text>
+                <text x="200" y="140" font-size="12" font-weight="bold" fill="#aaa">3.討價還價</text>
+                <text x="285" y="100" font-size="12" font-weight="bold" fill="#aaa">4.沮喪</text>
+                <text x="375" y="55" font-size="12" font-weight="bold" fill="#aaa">5.接受</text>
+                
+                <!-- 理想趨勢線說明 -->
+                <text x="300" y="25" font-size="12" fill="#888" font-weight="bold">理想復原歷程 📈</text>
+                
+                <!-- 谷底與峰值的動態標註 -->
+                <line x1="105" y1="210" x2="105" y2="235" stroke="#e63946" stroke-width="2" stroke-dasharray="3 3"/>
+                <text x="105" y="248" font-size="11" fill="#e63946" font-weight="bold" text-anchor="middle">後退兩步 (情緒反覆)</text>
+
+                <line x1="172" y1="92" x2="172" y2="60" stroke="#2a9d8f" stroke-width="2" stroke-dasharray="3 3"/>
+                <text x="172" y="53" font-size="11" fill="#2a9d8f" font-weight="bold" text-anchor="middle">前進三步 (跳躍階段)</text>
+                
+                <line x1="280" y1="168" x2="280" y2="195" stroke="#e63946" stroke-width="2" stroke-dasharray="3 3"/>
+                <text x="280" y="210" font-size="11" fill="#e63946" font-weight="bold" text-anchor="middle">突然被觸發</text>
+            `;
+        }
+        generateGriefPaths();
+
+        const actualPathNode = document.getElementById('actualPath');
         const cloudGroupCurvy = document.getElementById('cloudGroupCurvy');
         let curvyAnimFrame = null;
+        
         function updateCloudOnPath(progress) {
-            const pathLength = curvyPath.getTotalLength();
+            const pathLength = actualPathNode.getTotalLength();
             progress = Math.max(0, Math.min(1, progress));
-            const point = curvyPath.getPointAtLength(progress * pathLength);
+            const point = actualPathNode.getPointAtLength(progress * pathLength);
             cloudGroupCurvy.setAttribute('transform', `translate(${point.x}, ${point.y})`);
         }
         updateCloudOnPath(0);
@@ -427,21 +483,22 @@
 
             function animateCurvy(timestamp) {
                 if (!startTime) startTime = timestamp;
-                let t = (timestamp - startTime) / 1000;
-                let swing = 0.5 + 0.45 * Math.sin(t * 2) * Math.exp(-t * 0.15); 
-                updateCloudOnPath(swing);
+                // 利用時間線性推進即可，因為路徑 y_actual 本身已經帶有波浪函數的上下起伏
+                let t = (timestamp - startTime) / 6000; 
+                if (t > 1) t = 1;
                 
-                if (t < 7.0) {
+                updateCloudOnPath(t);
+                
+                if (t < 1.0) {
                     curvyAnimFrame = requestAnimationFrame(animateCurvy);
                 } else {
-                    updateCloudOnPath(1);
                     if(feedbackBox) feedbackBox.style.display = 'flex';
                 }
             }
             curvyAnimFrame = requestAnimationFrame(animateCurvy);
         }
 
-        // --- Page 2-B: DPM Animated Sequence (Fast & Snappy for Gen Z) ---
+        // --- Page 2-B: DPM Animated Sequence ---
         const pendulumGroup = document.getElementById('pendulumGroup');
         const penFeedback = document.getElementById('pendulum-feedback');
         let pendulumAnimId = null;
@@ -452,26 +509,23 @@
             
             function animatePendulum(timestamp) {
                 if (!startTime) startTime = timestamp;
-                let t = (timestamp - startTime) / 1000; // time in seconds
+                let t = (timestamp - startTime) / 1000; 
                 let angle = 0;
                 
-                // Total duration reduced to ~7.5 seconds
                 if (t < 2.0) {
-                    // Starts swung to LEFT (Loss side: negative angle) at t=0
                     angle = -35 * Math.cos(t * 7) * Math.exp(-t * 0.4) - 5;
                     penFeedback.innerHTML = "🧭 <b>初期：</b>剛經歷分離，情緒在「失落端」劇烈擺盪";
                     penFeedback.style.background = "#fcf3f3";
                 } 
                 else if (t < 4.0) {
                     let localT = t - 2.0;
-                    let center = -5 + 25 * (1 - Math.exp(-localT * 2)); // Shift center to +20 (Restoration)
+                    let center = -5 + 25 * (1 - Math.exp(-localT * 2)); 
                     angle = center - 20 * Math.cos(localT * 5) * Math.exp(-localT * 0.8);
                     penFeedback.innerHTML = "🌱 <b>適應期：</b>隨時間過去，擺盪減緩，重心移向「復原取向」。";
                     penFeedback.style.background = "#f0f9f4";
                 }
                 else if (t < 5.5) {
                     let localT = t - 4.0;
-                    // Trigger point swings back to negative angle (Loss side)
                     angle = 20 - 50 * Math.sin((localT / 1.5) * Math.PI);
                     penFeedback.innerHTML = "🌧️ <b>觸發點：</b>遇上節日或舊地重遊，仍會再次擺回「失落取向」...";
                     penFeedback.style.background = "#fcf3f3";
