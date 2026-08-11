@@ -1132,7 +1132,7 @@
             btn.classList.add('active');
             stageAns = btn.textContent.trim();
             document.getElementById('stage-feedback').innerHTML =
-                `📍 你標記了「<b>${stageAns}</b>」。無論在哪裡，都沒有「應該」的位置——來回，也是前行的一部分。🤍`;
+                `📍「<b>${stageAns}</b>」。無論在哪裡，都沒有「應該」的位置——來回，也是前行的一部分。🤍`;
         }
         function pickSwing(btn){
             document.querySelectorAll('#swingPick .tag-btn').forEach(b => b.classList.remove('active'));
