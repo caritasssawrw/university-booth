@@ -159,6 +159,21 @@
         .cloud-stage { display: flex; justify-content: center; margin: 2px 0; }
         .cloud-stage svg { width: 96%; max-width: 400px; height: auto; }
 
+        /* ★★★ 黏貼置頂雲朵：捲動點選標籤時仍可見天氣變化 ★★★ */
+        #skyPick .cloud-stage {
+            position: sticky; top: 8px; z-index: 60;
+            background: rgba(255, 255, 255, 0.94);
+            border: 2px dashed #9ad5f8; border-radius: 14px;
+            padding: 2px 0 4px 0; margin-bottom: 12px;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 3px 10px rgba(58, 90, 120, 0.12);
+        }
+        #skyPick .cloud-stage svg { max-width: 250px; }
+        #skyPick .cloud-stage .sticky-hint {
+            position: absolute; bottom: 4px; right: 10px;
+            font-size: 9.5px; color: #9ad5f8; font-weight: 700; letter-spacing: 1px;
+        }
+
         #skyResult { display: none; }
         .sky {
             position: relative; height: 110px; overflow: hidden; margin: 4px 0;
@@ -282,11 +297,6 @@
         }
         .tip-block b.tip-title { display: block; font-size: 13.5px; margin-bottom: 4px; }
         .tip-block.gentle-note { background: #fff3e6; border-style: dashed; }
-        .ground-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-        .ground-chips span {
-            background: #fff; border: 2px solid #111; border-radius: 20px; padding: 3px 10px;
-            font-size: 11.5px; font-weight: 700;
-        }
 
         /* ★★★ 私隱聲明小字 ★★★ */
         .privacy-note {
@@ -367,15 +377,16 @@
             <p style="margin-bottom:0;">帶著傷痕，溫柔整理。</p>
         </div>
 
-        <!-- ================= PAGE 1: 攤開區（★ 整合「同一片天空」） ================= -->
+        <!-- ================= PAGE 1: 覺察區（★ 整合「同一片天空」） ================= -->
         <div id="page1" class="page active">
             <div class="doodle-card">
-                <span class="zone-tag">Step 1：攤開區 🧳</span>
+                <span class="zone-tag">Step 1：覺察區 🧳</span>
                 <h2>同一片天空：身心訊號覺察</h2>
                 <div class="quote-box">「明明只是分開了，為何個心會翳悶，甚至頭昏腦脹……是我的身體出了問題嗎？」</div>
 
                 <!-- ★★★ 選擇畫面 ★★★ -->
                 <div id="skyPick">
+                    <!-- ★ 雲朵黏貼置頂：捲動時仍可見天氣變化 -->
                     <div class="cloud-stage">
                         <svg id="cloudSvg" viewBox="-100 -110 840 760" aria-label="雲朵">
                             <!-- 天氣層（風放喺雲後面，避免遮面） -->
@@ -400,6 +411,7 @@
                             <!-- 膠布層（提交後才出現） -->
                             <g id="plaster"></g>
                         </svg>
+                        <span class="sticky-hint">☁️ 雲朵會陪你捲動</span>
                     </div>
 
                     <div class="text-content" style="text-align:center;">
@@ -449,7 +461,7 @@
                     </div>
 
                     <div style="text-align: center; margin-top:20px;">
-                        <button class="action-btn" onclick="switchPage('page2')">攤開了，前往整理區慢慢梳理 ➡️</button>
+                        <button class="action-btn" onclick="switchPage('page2')">覺察了，前往整理區慢慢梳理 ➡️</button>
                     </div>
                 </div>
             </div>
@@ -536,7 +548,7 @@
                 </div>
 
                 <!-- ★★★ 併入反思：標記今日的你（單選，無手繪） ★★★ -->
-                <div class="tag-category" style="margin-top:18px;">📍 看過示範後，標記一下：今日的你，大約在哪個位置？</div>
+                <div class="tag-category" style="margin-top:18px;">📍 沉澱一下，在圖中標記：今日的你，大約在哪個位置？</div>
                 <div class="tags-grid" id="stagePick">
                     <button class="tag-btn" onclick="pickStage(this)">否認</button>
                     <button class="tag-btn" onclick="pickStage(this)">憤怒</button>
@@ -783,24 +795,18 @@
                 </div>
             </div>
 
-            <!-- Step 3-C: 自我關懷小貼士（★ 精簡版＋外部連結＋未來想試） -->
+            <!-- Step 3-C: 自我關懷小貼士（★ 依新文案精簡） -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 3-C：小貼士 🌱</span>
                 <h2>如何培養自我關懷態度？</h2>
-                <div class="quote-box">「自我關懷是一種善意的修行，而非愉悅的享受或躺平。允許自己慢慢學習，將它變成新的習慣。」</div>
 
                 <div class="tip-block">
                     <b class="tip-title">🍵 日常生活練習</b>
-                    <b>非正式（隨時隨地）：</b>自我關懷休息・書寫探索・支持性觸摸（把一隻手輕放在心口上）<br>
-                    <b>正式（定時進行）：</b>慈愛呼吸法——每天數分鐘，隨著呼吸把善意帶給自己。
+                    自我關懷是一種善意的修行，而非愉悅的享受或躺平，允許自己慢慢學習，將它變成新的習慣。一些日常生活練習有助建立自我關懷態度，如：<b>自我關懷休息、書寫、支持性觸摸（把手輕放心口）、慈愛呼吸法</b>等。
                 </div>
                 <div class="tip-block gentle-note">
-                    <b class="tip-title">🕯️ 溫柔提示：「回燃」現象</b>
-                    起初練習時痛苦可能反而加劇——敞開心扉讓愛湧入時，舊傷也隨之流出，這是正常過程。若感到被情緒淹沒，請容許自己暫時抽身：
-                    <div class="ground-chips">
-                        <span>🌬️ 專注呼吸</span><span>🦶 感受雙腳與地面接觸</span><span>🍵 喝杯茶</span><span>🐈 撫摸貓咪</span>
-                    </div>
-                    <div style="margin-top:8px;">這種照顧自己當下需要的態度，本身已經是自我關懷。🤍</div>
+                    <b class="tip-title">🕯️ 溫馨提示：「回燃」現象</b>
+                    起初練習時痛苦可能會加劇，這現象稱為「回燃」——敞開心扉讓愛湧入，舊傷也隨之流出。若感到被情緒淹沒，請容許自己暫時抽身：<b>專注呼吸、感受雙腳踏地、喝杯茶、撫摸貓咪</b>安定自己。照顧當下的需要，本身已是自我關懷。🤍
                 </div>
 
                 <!-- ★ 外部連結按鈕 -->
@@ -837,7 +843,7 @@
                     面對關係分離，有哪些東西是你此刻很想「放下」的？是一個人？一個疑問？還是等不到的抱歉，抑或是一句對自己的安慰？
                 </div>
 
-                <!-- ★★★ 私隱聲明（已更新：2027年3月31日後刪除） ★★★ -->
+                <!-- ★★★ 私隱聲明（2027年3月31日後刪除） ★★★ -->
                 <div class="privacy-note">
                     🔒 <b>私隱聲明：</b>您所提供的資料，會以<b>匿名方式</b>記錄，並作保密處理，主要供本服務了解參加者需要及改善服務之用，並會於本年度計劃結束（<b>2027年3月31日</b>）後刪除。內容不會用作識別任何個人身份。<br>
                     ✋ 請<b>不要寫上姓名、電話或其他可識別個人身份的資料</b>。如您正面對難以承受的困擾，歡迎直接與在場工作人員傾談。🤍
@@ -866,7 +872,7 @@
                             <div class="r-meta"><span id="rNo"></span>　<span id="rDate"></span></div>
                         </div>
                         <div class="r-line"></div>
-                        <div class="r-item"><span>✔ 正視身心反應</span><span>已整理</span></div>
+                        <div class="r-item"><span>✔ 正視身心反應</span><span>已覺察</span></div>
                         <div class="r-item"><span>✔ 標記哀傷位置</span><span id="rStage">已標記</span></div>
                         <div class="r-item"><span>✔ 覺察雙軌擺盪</span><span id="rSwing">已覺察</span></div>
                         <div class="r-item"><span>✔ 翻轉內在聲音 ×3</span><span>已拆箱</span></div>
@@ -916,7 +922,7 @@
 
     <!-- 底部導覽列 -->
     <div class="nav-bar">
-        <button class="nav-btn active" onclick="switchPage('page1')">1. 攤開</button>
+        <button class="nav-btn active" onclick="switchPage('page1')">1. 覺察</button>
         <button class="nav-btn" onclick="switchPage('page2')">2. 整理</button>
         <button class="nav-btn" onclick="switchPage('page3')">3. 安放</button>
     </div>
@@ -1235,7 +1241,7 @@
                 if (t < walkDuration) {
                     curvyAnimFrame = requestAnimationFrame(animateWalk);
                 } else {
-                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br><b>👇 現在，試著在下方標記今日的你。</b>";
+                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br><b>👇 現在，沉澱一下，在下方標記今日的你。</b>";
                     setBubbleStyle("end");
                     if (feedbackBox) feedbackBox.style.display = 'flex';
                 }
