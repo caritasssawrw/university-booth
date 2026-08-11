@@ -159,7 +159,7 @@
         .cloud-stage { display: flex; justify-content: center; margin: 2px 0; }
         .cloud-stage svg { width: 96%; max-width: 400px; height: auto; }
 
-        /* ★★★ 黏貼置頂雲朵：捲動點選標籤時仍可見天氣變化 ★★★ */
+        /* ★★★ 黏貼置頂雲朵：捲動時自動縮小 ★★★ */
         #skyPick .cloud-stage {
             position: sticky; top: 8px; z-index: 60;
             background: rgba(255, 255, 255, 0.94);
@@ -167,12 +167,21 @@
             padding: 2px 0 4px 0; margin-bottom: 12px;
             backdrop-filter: blur(2px);
             box-shadow: 0 3px 10px rgba(58, 90, 120, 0.12);
+            transition: padding 0.35s ease;
         }
-        #skyPick .cloud-stage svg { max-width: 250px; }
+        #skyPick .cloud-stage svg {
+            max-width: 250px;
+            transition: max-width 0.35s ease;
+        }
         #skyPick .cloud-stage .sticky-hint {
             position: absolute; bottom: 4px; right: 10px;
             font-size: 9.5px; color: #9ad5f8; font-weight: 700; letter-spacing: 1px;
+            transition: opacity 0.3s ease;
         }
+        /* ★ 貼頂（捲動中）狀態：雲朵縮細、收窄內距、隱藏提示字 */
+        #skyPick .cloud-stage.stuck { padding: 0; }
+        #skyPick .cloud-stage.stuck svg { max-width: 120px; }
+        #skyPick .cloud-stage.stuck .sticky-hint { opacity: 0; }
 
         #skyResult { display: none; }
         .sky {
@@ -386,8 +395,10 @@
 
                 <!-- ★★★ 選擇畫面 ★★★ -->
                 <div id="skyPick">
-                    <!-- ★ 雲朵黏貼置頂：捲動時仍可見天氣變化 -->
-                    <div class="cloud-stage">
+                    <!-- ★ 偵測貼頂用的哨兵（1px，不佔視覺空間） -->
+                    <div id="cloudSentinel" style="height:1px;"></div>
+                    <!-- ★ 雲朵黏貼置頂：捲動時自動縮小 -->
+                    <div class="cloud-stage" id="cloudStage">
                         <svg id="cloudSvg" viewBox="-100 -110 840 760" aria-label="雲朵">
                             <!-- 天氣層（風放喺雲後面，避免遮面） -->
                             <g id="weatherBack"></g>
@@ -411,7 +422,7 @@
                             <!-- 膠布層（提交後才出現） -->
                             <g id="plaster"></g>
                         </svg>
-                        <span class="sticky-hint">☁️ </span>
+                        <span class="sticky-hint">☁️ 雲朵會陪你捲動</span>
                     </div>
 
                     <div class="text-content" style="text-align:center;">
@@ -548,7 +559,7 @@
                 </div>
 
                 <!-- ★★★ 併入反思：標記今日的你（單選，無手繪） ★★★ -->
-                <div class="tag-category" style="margin-top:18px;">📍 沉澱一下，在圖中標記：今日的你，大約在哪個位置？</div>
+                <div class="tag-category" style="margin-top:18px;">📍 反思整理一下，今日的你，大約在哪個階段？</div>
                 <div class="tags-grid" id="stagePick">
                     <button class="tag-btn" onclick="pickStage(this)">否認</button>
                     <button class="tag-btn" onclick="pickStage(this)">憤怒</button>
@@ -795,7 +806,7 @@
                 </div>
             </div>
 
-            <!-- Step 3-C: 自我關懷小貼士（★ 依新文案精簡） -->
+            <!-- Step 3-C: 自我關懷小貼士 -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 3-C：小貼士 🌱</span>
                 <h2>如何培養自我關懷態度？</h2>
@@ -855,7 +866,7 @@
                 <div class="note-alert" id="note-alert"></div>
                 
                 <div style="text-align: center;">
-                    <button class="action-btn" onclick="generateTape()">封存並列印整理收據 🧾</button>
+                    <button class="action-btn" onclick="generateTape()">封存並整理收據 🧾</button>
                 </div>
 
                 <div id="postcard-box" style="display:none; margin-top: 18px; padding: 18px; background: #fffbe6; border: 2.5px dashed #111; border-radius: 12px; text-align: center;">
@@ -1029,6 +1040,16 @@
             if (n === 0) fb.innerHTML = "點擊上方標籤，看看你的身心正為你承載著什麼？🤍";
             else if (n <= 3) fb.innerHTML = `你選了 ${n} 個訊號，雲上的天氣也起了變化。<br>看見這些不舒服，是自我修復的第一步。辛苦你了。`;
             else fb.innerHTML = `你選了 ${n} 個訊號，這朵雲正承受著風雨雷電。<br>你的身心正承受著巨大的壓力警報，請允許自己好好休息。`;
+        }
+
+        // ====== ★★★ 貼頂偵測：捲動時雲朵自動縮小 ★★★ ======
+        const cloudStage = document.getElementById('cloudStage');
+        const cloudSentinel = document.getElementById('cloudSentinel');
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => {
+                // 哨兵離開畫面頂部 → 雲朵處於貼頂狀態 → 縮小
+                cloudStage.classList.toggle('stuck', !entry.isIntersecting);
+            }, { threshold: 0 }).observe(cloudSentinel);
         }
 
         // ====== 招牌膠布 ======
@@ -1241,7 +1262,7 @@
                 if (t < walkDuration) {
                     curvyAnimFrame = requestAnimationFrame(animateWalk);
                 } else {
-                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br><b>👇 現在，沉澱一下，在下方標記今日的你。</b>";
+                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br><b></b>";
                     setBubbleStyle("end");
                     if (feedbackBox) feedbackBox.style.display = 'flex';
                 }
