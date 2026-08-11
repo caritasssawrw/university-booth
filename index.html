@@ -98,11 +98,11 @@
         .action-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #111; }
         .action-btn:disabled { background: #ddd; color: #999; box-shadow: 3px 3px 0px #999; cursor: not-allowed; }
 
-        /* Status & Feedback Boxes */
+        /* ★★★ Status & Feedback Boxes（已修正：由 flex 改為 block，文字自然排版） ★★★ */
         .feedback-box {
-            background: #fdfbf7; border: 2px dashed #111; border-radius: 10px; padding: 12px 15px;
-            font-size: 13px; line-height: 1.6; min-height: 60px; display: flex; align-items: center;
-            justify-content: center; text-align: center; margin-top: 15px; font-weight: 500; transition: 0.3s;
+            background: #fdfbf7; border: 2px dashed #111; border-radius: 10px; padding: 14px 16px;
+            font-size: 13px; line-height: 1.75; text-align: center;
+            margin-top: 15px; font-weight: 500; transition: 0.3s;
         }
 
         /* SVG Stage */
@@ -299,13 +299,27 @@
         .more-list.show { display: block; animation: fadeIn 0.4s ease; }
         .more-list ul { margin: 0; padding-left: 20px; font-size: 12.5px; line-height: 1.9; color: #444; }
 
-        /* --- 自我關懷小貼士 --- */
+        /* ★★★ 自我關懷小貼士（照片式排版） ★★★ */
         .tip-block {
-            border: 2px solid #111; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px;
-            background: #fdfbf7; box-shadow: 2px 2px 0px #111; font-size: 13px; line-height: 1.65;
+            border: 2.5px solid #111; border-radius: 14px; padding: 14px 16px; margin-bottom: 14px;
+            background: #fff; box-shadow: 3px 3px 0px #111; font-size: 13px; line-height: 1.75; color: #444;
         }
-        .tip-block b.tip-title { display: block; font-size: 13.5px; margin-bottom: 4px; }
-        .tip-block.gentle-note { background: #fff3e6; border-style: dashed; }
+        .tip-block b.tip-title {
+            display: block; font-size: 14.5px; margin-bottom: 6px; color: #111;
+        }
+        .tip-block.gentle-note {
+            background: #fdfbf7; border-style: dashed; box-shadow: none;
+        }
+        /* 小藥丸標籤（回燃安定方法） */
+        .tip-chips {
+            display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; justify-content: flex-start;
+        }
+        .tip-chip {
+            display: inline-block; background: #fff; border: 2px solid #111; border-radius: 20px;
+            padding: 5px 13px; font-size: 12px; font-weight: 700; color: #111;
+            box-shadow: 2px 2px 0px #111; white-space: nowrap;
+        }
+        .tip-closing { font-size: 12.5px; color: #666; margin-top: 8px; font-weight: 700; }
 
         /* ★★★ 私隱聲明小字 ★★★ */
         .privacy-note {
@@ -559,7 +573,7 @@
                 </div>
 
                 <!-- ★★★ 併入反思：標記今日的你（單選，無手繪） ★★★ -->
-                <div class="tag-category" style="margin-top:18px;">📍 反思整理一下，今日的你，大約在哪個階段？</div>
+                <div class="tag-category" style="margin-top:18px;">📍 沉澱一下，在圖中標記：今日的你，大約在哪個位置？</div>
                 <div class="tags-grid" id="stagePick">
                     <button class="tag-btn" onclick="pickStage(this)">否認</button>
                     <button class="tag-btn" onclick="pickStage(this)">憤怒</button>
@@ -568,7 +582,7 @@
                     <button class="tag-btn" onclick="pickStage(this)">接受</button>
                     <button class="tag-btn" onclick="pickStage(this)">🔄 在幾個階段之間穿梭</button>
                 </div>
-                <div class="feedback-box" id="stage-feedback" style="min-height:44px;">
+                <div class="feedback-box" id="stage-feedback">
                     無論標記在哪裡，都沒有「應該」的位置——來回，也是前行的一部分。🤍
                 </div>
             </div>
@@ -622,7 +636,7 @@
                     <button class="tag-btn" onclick="pickSwing(this)">🌱 較接近復原取向</button>
                     <button class="tag-btn" onclick="pickSwing(this)">🤷 說不清</button>
                 </div>
-                <div class="feedback-box" id="swing-feedback" style="min-height:44px;">
+                <div class="feedback-box" id="swing-feedback">
                     無論在哪一端，都是歷程的一部分，沒有對錯。🤍
                 </div>
             </div>
@@ -788,7 +802,7 @@
                     <button class="action-btn" style="padding: 8px 16px; font-size: 13px;" onclick="toggleMoreList()">➕ 還有更多改變……</button>
                 </div>
                 <div class="more-list" id="more-list">
-                    <div class="feedback-box" style="display:block; text-align:left; margin-top:12px;">
+                    <div class="feedback-box" style="text-align:left; margin-top:12px;">
                         <ul>
                             <li>自我關懷能降低大腦的警報，分泌催產素與安多酚，激活副交感神經系統，讓身體更快從壓力狀態恢復平靜。</li>
                             <li>🪨 擁有穩定且無條件的自我價值感</li>
@@ -806,18 +820,38 @@
                 </div>
             </div>
 
-            <!-- Step 3-C: 自我關懷小貼士 -->
+            <!-- Step 3-C: 自我關懷小貼士（★★★ 照片式分區排版 ★★★） -->
             <div class="doodle-card">
                 <span class="zone-tag">Step 3-C：小貼士 🌱</span>
                 <h2>如何培養自我關懷態度？</h2>
 
-                <div class="tip-block">
-                    <b class="tip-title">🍵 日常生活練習</b>
-                    自我關懷是一種善意的修行，而非愉悅的享受或躺平，允許自己慢慢學習，將它變成新的習慣。一些日常生活練習有助建立自我關懷態度，如：<b>自我關懷休息、書寫、支持性觸摸（把手輕放心口）、慈愛呼吸法</b>等。
+                <div class="quote-box">
+                    「自我關懷是一種善意的修行，而非愉悅的享受或躺平。允許自己慢慢學習，將它變成新的習慣。」
                 </div>
+
+                <!-- 非正式練習 -->
+                <div class="tip-block">
+                    <b class="tip-title">🍵 非正式練習（隨時隨地）</b>
+                    自我關懷休息・透過寫作探索自我關懷・支持性觸摸（例如：把一隻手輕放在心口上）
+                </div>
+
+                <!-- 正式練習 -->
+                <div class="tip-block">
+                    <b class="tip-title">🧘 正式練習（定時進行）</b>
+                    慈愛呼吸法——每天數分鐘，隨著呼吸把善意帶給自己。
+                </div>
+
+                <!-- 回燃提示 -->
                 <div class="tip-block gentle-note">
-                    <b class="tip-title">🕯️ 溫馨提示：「回燃」現象</b>
-                    起初練習時痛苦可能會加劇，這現象稱為「回燃」——敞開心扉讓愛湧入，舊傷也隨之流出。若感到被情緒淹沒，請容許自己暫時抽身：<b>專注呼吸、感受雙腳踏地、喝杯茶、撫摸貓咪</b>安定自己。照顧當下的需要，本身已是自我關懷。🤍
+                    <b class="tip-title">🕯️ 溫柔提示：「回燃」現象</b>
+                    有些人練習自我關懷時，起初痛苦反而會加劇——敞開心扉讓愛湧入時，舊傷也隨之流出。這是正常的過程。如果感到被負面情緒淹沒，請容許自己暫時抽身：
+                    <div class="tip-chips">
+                        <span class="tip-chip">🌬️ 專注呼吸</span>
+                        <span class="tip-chip">🦶 感受雙腳與地面接觸</span>
+                        <span class="tip-chip">🍵 喝杯茶</span>
+                        <span class="tip-chip">🐈 撫摸貓咪</span>
+                    </div>
+                    <div class="tip-closing">這種照顧自己當下需要的態度，本身已經是自我關懷。🤍</div>
                 </div>
 
                 <!-- ★ 外部連結按鈕 -->
@@ -841,7 +875,7 @@
                     <button class="tag-btn" onclick="pickFuture(this)">喝杯茶</button>
                     <button class="tag-btn" onclick="pickFuture(this)">撫摸小動物</button>
                 </div>
-                <div class="feedback-box" id="future-feedback" style="min-height:44px;">
+                <div class="feedback-box" id="future-feedback">
                     選一兩個最容易開始的就足夠了，慢慢來。🤍
                 </div>
             </div>
@@ -866,7 +900,7 @@
                 <div class="note-alert" id="note-alert"></div>
                 
                 <div style="text-align: center;">
-                    <button class="action-btn" onclick="generateTape()">封存並整理收據 🧾</button>
+                    <button class="action-btn" onclick="generateTape()">封存並列印整理收據 🧾</button>
                 </div>
 
                 <div id="postcard-box" style="display:none; margin-top: 18px; padding: 18px; background: #fffbe6; border: 2.5px dashed #111; border-radius: 12px; text-align: center;">
@@ -1047,7 +1081,6 @@
         const cloudSentinel = document.getElementById('cloudSentinel');
         if ('IntersectionObserver' in window) {
             new IntersectionObserver(([entry]) => {
-                // 哨兵離開畫面頂部 → 雲朵處於貼頂狀態 → 縮小
                 cloudStage.classList.toggle('stuck', !entry.isIntersecting);
             }, { threshold: 0 }).observe(cloudSentinel);
         }
@@ -1132,14 +1165,14 @@
             btn.classList.add('active');
             stageAns = btn.textContent.trim();
             document.getElementById('stage-feedback').innerHTML =
-                `📍「<b>${stageAns}</b>」。無論在哪裡，都沒有「應該」的位置——來回，也是前行的一部分。🤍`;
+                `📍 你標記了「<b>${stageAns}</b>」。<br>無論標記在哪裡，都沒有「應該」的位置——來回，也是前行的一部分。🤍`;
         }
         function pickSwing(btn){
             document.querySelectorAll('#swingPick .tag-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             swingAns = btn.textContent.trim();
             document.getElementById('swing-feedback').innerHTML =
-                `🧭 你此刻較接近「<b>${swingAns}</b>」。無論在哪一端，都是歷程的一部分，沒有對錯。🤍`;
+                `🧭 你此刻較接近「<b>${swingAns}</b>」。<br>無論在哪一端，都是歷程的一部分，沒有對錯。🤍`;
         }
         function pickFuture(btn){
             btn.classList.toggle('active');
@@ -1262,9 +1295,9 @@
                 if (t < walkDuration) {
                     curvyAnimFrame = requestAnimationFrame(animateWalk);
                 } else {
-                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br><b></b>";
+                    triggerBubble.innerHTML = "🏁 回望你的復原路線——有起有伏、有後退、有繞圈。允許自己在修復路上有起有伏，溫柔包容自己的反覆。<br><b>👇 現在，沉澱一下，在下方標記今日的你。</b>";
                     setBubbleStyle("end");
-                    if (feedbackBox) feedbackBox.style.display = 'flex';
+                    if (feedbackBox) feedbackBox.style.display = 'block';
                 }
             }
             curvyAnimFrame = requestAnimationFrame(animateWalk);
